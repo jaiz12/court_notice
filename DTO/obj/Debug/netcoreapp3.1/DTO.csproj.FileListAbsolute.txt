@@ -1,0 +1,10 @@
+D:\GIT Projects\Inhouse HRMS\HRMS_EmployeeProfileAPI\DTO\bin\Debug\netcoreapp3.1\DTO.deps.json
+D:\GIT Projects\Inhouse HRMS\HRMS_EmployeeProfileAPI\DTO\bin\Debug\netcoreapp3.1\DTO.dll
+D:\GIT Projects\Inhouse HRMS\HRMS_EmployeeProfileAPI\DTO\bin\Debug\netcoreapp3.1\DTO.pdb
+D:\GIT Projects\Inhouse HRMS\HRMS_EmployeeProfileAPI\DTO\obj\Debug\netcoreapp3.1\DTO.csproj.AssemblyReference.cache
+D:\GIT Projects\Inhouse HRMS\HRMS_EmployeeProfileAPI\DTO\obj\Debug\netcoreapp3.1\DTO.GeneratedMSBuildEditorConfig.editorconfig
+D:\GIT Projects\Inhouse HRMS\HRMS_EmployeeProfileAPI\DTO\obj\Debug\netcoreapp3.1\DTO.AssemblyInfoInputs.cache
+D:\GIT Projects\Inhouse HRMS\HRMS_EmployeeProfileAPI\DTO\obj\Debug\netcoreapp3.1\DTO.AssemblyInfo.cs
+D:\GIT Projects\Inhouse HRMS\HRMS_EmployeeProfileAPI\DTO\obj\Debug\netcoreapp3.1\DTO.csproj.CoreCompileInputs.cache
+D:\GIT Projects\Inhouse HRMS\HRMS_EmployeeProfileAPI\DTO\obj\Debug\netcoreapp3.1\DTO.dll
+D:\GIT Projects\Inhouse HRMS\HRMS_EmployeeProfileAPI\DTO\obj\Debug\netcoreapp3.1\DTO.pdb

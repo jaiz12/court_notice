@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\API",
+    "\\API\\Controllers",
+    "\\API\\Controllers\\EmployeeControllers",
+    "\\DTO",
+    "\\DTO\\Models",
+    "\\DTO\\Models\\Auth",
+    "\\DTO\\Models\\Employee"
+  ],
+  "PreviewInSolutionExplorer": false
+}
