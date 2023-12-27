@@ -1,0 +1,14 @@
+/.vs
+/API/bin
+/API/obj
+/BAL/bin
+/BAL/obj
+/Common/bin
+/Common/obj
+/DTO/bin
+/DTO/obj
+/ExceptionHandling/bin
+/ExceptionHandling/obj
+/API/API.csproj.user
+/API/assets
+/API/appsettings.json
