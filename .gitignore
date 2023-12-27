@@ -12,3 +12,15 @@
 /API/API.csproj.user
 /API/assets
 /API/appsettings.json
+/API/obj/Debug/netcoreapp3.1/API.assets.cache
+/API/obj/Debug/netcoreapp3.1/API.csproj.AssemblyReference.cache
+/API/obj/Debug/netcoreapp3.1/API.GeneratedMSBuildEditorConfig.editorconfig
+/Common/obj/Debug/netcoreapp3.1/Common.GeneratedMSBuildEditorConfig.editorconfig
+/Common/obj/Debug/netcoreapp3.1/Common.csproj.AssemblyReference.cache
+/Common/obj/Debug/netcoreapp3.1/Common.assets.cache
+/DTO/obj/Debug/netcoreapp3.1/DTO.GeneratedMSBuildEditorConfig.editorconfig
+/DTO/obj/Debug/netcoreapp3.1/DTO.csproj.AssemblyReference.cache
+/DTO/obj/Debug/netcoreapp3.1/DTO.assets.cache
+/ExceptionHandling/obj/Debug/netcoreapp3.1/ExceptionHandling.GeneratedMSBuildEditorConfig.editorconfig
+/ExceptionHandling/obj/Debug/netcoreapp3.1/ExceptionHandling.csproj.AssemblyReference.cache
+/ExceptionHandling/obj/Debug/netcoreapp3.1/ExceptionHandling.assets.cache
