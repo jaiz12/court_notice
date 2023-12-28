@@ -46,6 +46,7 @@ using DinkToPdf.Contracts;
 using DinkToPdf;
 using BAL.Services.EmployeeOperations.EmployeePrintCV.Utility;
 using System.IO;
+using BAL.Services.Dashboard;
 
 namespace BAL.DependencyResolver
 {
@@ -111,6 +112,7 @@ namespace BAL.DependencyResolver
             services.AddScoped<IInServiceTrainingService, InServiceTrainingService>();
             services.AddScoped<IStateService, StateService>();
             services.AddScoped<IDistrictService, DistrictService>();
+            services.AddScoped<IDashboardService, DashboardService>();
 
 
             return services;
