@@ -14,7 +14,7 @@ using BAL.Services.Master.DistrictService;
 using BAL.Services.Master.DivisionService;
 using BAL.Services.Master.ExitTypeService;
 using BAL.Services.Master.GenderService;
-using BAL.Services.Master.IndentificationTypeServices;
+using BAL.Services.Master.IdentificationTypeServices;
 using BAL.Services.Master.MaritalStatusService;
 using BAL.Services.Master.MasterServices.AppointmentStatus;
 using BAL.Services.Master.MasterServices.Community;
