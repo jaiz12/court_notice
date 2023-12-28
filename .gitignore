@@ -91,7 +91,6 @@
 /.vs/EmployeeProfile/v17/.futdcache.v2
 /.vs/EmployeeProfile/v17/.suo
 /API/bin/Debug/netcoreapp3.1/log/internal_logs/internal_nlog.txt
-/API/bin/Debug/netcoreapp3.1/appsettings.json
 /DTO/bin/Debug/netcoreapp3.1/DTO.pdb
 /DTO/bin/Debug/netcoreapp3.1/DTO.dll
 /ExceptionHandling/bin/Debug/netcoreapp3.1/ExceptionHandling.runtimeconfig.dev.json
