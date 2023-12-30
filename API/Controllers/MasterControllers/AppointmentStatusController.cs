@@ -44,7 +44,15 @@ namespace API.Controllers.MasterController
             {
                 return BadRequest(new { message = "Unauthorize User.", messageDescription = "You are not authorize to use the module. Please contact with your admin for the permission" });
             }
-            return Ok(_appointmentStatusService.Get());
+            try
+            {
+                var result = await _appointmentStatusService.Get();
+                return Ok(result);
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
 
         [HttpPost]
@@ -60,7 +68,16 @@ namespace API.Controllers.MasterController
             {
                 return BadRequest(ModelState);
             }
-            return Ok(_appointmentStatusService.Post(item));
+            //return Ok(_appointmentStatusService.Post(item));
+            try
+            {
+                var result = _appointmentStatusService.Post(item);
+                return Ok(new { result = result });
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
 
         [HttpPut]
@@ -76,7 +93,16 @@ namespace API.Controllers.MasterController
             {
                 return BadRequest(ModelState);
             }
-            return Ok(_appointmentStatusService.Update(item));
+            //return Ok(_appointmentStatusService.Update(item));
+            try
+            {
+                var result = _appointmentStatusService.Update(item);
+                return Ok(new { result = result });
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
 
         [HttpDelete]
@@ -88,7 +114,18 @@ namespace API.Controllers.MasterController
             {
                 return BadRequest(new { message = "Unauthorize User.", messageDescription = "You are not authorize to use the module. Please contact with your admin for the permission" });
             }
-            return Ok(await _appointmentStatusService.Delete(id));
+            //return Ok(await _appointmentStatusService.Delete(id));
+            try
+            {
+                var result = _appointmentStatusService.Delete(id);
+                return Ok(new { result = result });
+            }
+            catch
+            {
+                return BadRequest();
+            }
+
+            
         }
 
     }
