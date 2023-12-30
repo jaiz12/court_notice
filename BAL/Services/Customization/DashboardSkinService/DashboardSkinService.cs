@@ -11,7 +11,7 @@ namespace BAL.Services.Customization.DashboardSkinService
 {
     public class DashboardSkinService : MyDbContext, IDashboardSkinService
     {
-        public async Task<DataResponse> PostDashboardSkin(List<DashboardSkin_DTO> _dashboardSkin)
+        public async Task<DataResponse> PostOrUpdateDashboardSkin(List<DashboardSkin_DTO> _dashboardSkin)
         {
             try
             {
@@ -29,23 +29,24 @@ namespace BAL.Services.Customization.DashboardSkinService
                     _sqlCommand.Add_Parameter_WithValue("prm_image_height", skin.image_height);
                     _sqlCommand.Add_Parameter_WithValue("prm_image_width", skin.image_width);
                     _sqlCommand.Add_Parameter_WithValue("prm_text_alignment", skin.text_alignment);
+                    _sqlCommand.Add_Parameter_WithValue("prm_font_scheme", skin.font_scheme);
 
                     _sqlCommand.Add_Parameter_WithValue("prm_created_on", skin.created_on = DateTime.Now);
                     _sqlCommand.Add_Parameter_WithValue("prm_created_by", skin.created_by);
                     _sqlCommand.Add_Parameter_WithValue("prm_updated_on", skin.updated_on = DateTime.Now);
                     _sqlCommand.Add_Parameter_WithValue("prm_updated_by", skin.updated_by);
 
-                    item = await Task.Run(() => _sqlCommand.Execute_Query("skin_post_customize_dashboard", CommandType.StoredProcedure));
+                    item = await Task.Run(() => _sqlCommand.Execute_Query("skin_post_or_update_customize_dashboard", CommandType.StoredProcedure));
 
                     noOfinsertSuccess.Add(skin);
                 }
                 if (item)
                 {
-                    return new DataResponse("Dashboard Skin Varaints Added & Applied Successfully", true);
+                    return new DataResponse("Theme Updated Successfully", true);
                 }
                 else
                 {
-                    return new DataResponse($"Dashboard Skin Variants Are Already Applied", false);
+                    return new DataResponse($"No Changes Found", false);
                 }
             }
             catch (Exception ex)
@@ -76,6 +77,7 @@ namespace BAL.Services.Customization.DashboardSkinService
                     _sqlCommand.Add_Parameter_WithValue("prm_image_height", skin.image_height);
                     _sqlCommand.Add_Parameter_WithValue("prm_image_width", skin.image_width);
                     _sqlCommand.Add_Parameter_WithValue("prm_text_alignment", skin.text_alignment);
+                    _sqlCommand.Add_Parameter_WithValue("prm_font_scheme", skin.font_scheme);
 
                     _sqlCommand.Add_Parameter_WithValue("prm_updated_on", skin.updated_on = DateTime.Now);
                     _sqlCommand.Add_Parameter_WithValue("prm_updated_by", skin.updated_by);
