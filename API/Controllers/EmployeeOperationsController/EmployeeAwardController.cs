@@ -79,6 +79,7 @@ namespace API.Controllers.EmployeeOperationsController
             {
                 var result = await _employeeAwardService.GetEmployeeAward(filters);
                 return Ok(result);
+
             }
             catch
             {
