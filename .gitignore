@@ -12,3 +12,12 @@
 /API/API.csproj.user
 /API/assets
 /API/appsettings.json
+/.vs/EmployeeProfile/config/applicationhost.config
+/API/bin/Debug/netcoreapp3.1/log/internal_logs/internal_nlog.txt
+/API/appsettings.json
+/BAL/bin/Debug/netcoreapp3.1/BAL.dll
+/BAL/bin/Debug/netcoreapp3.1/BAL.pdb
+/BAL/bin/Debug/netcoreapp3.1/Common.dll
+/BAL/bin/Debug/netcoreapp3.1/Common.pdb
+/BAL/bin/Debug/netcoreapp3.1/DTO.dll
+/BAL/bin/Debug/netcoreapp3.1/DTO.pdb
