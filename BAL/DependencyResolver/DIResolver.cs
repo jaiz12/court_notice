@@ -14,7 +14,7 @@ using BAL.Services.Master.DistrictService;
 using BAL.Services.Master.DivisionService;
 using BAL.Services.Master.ExitTypeService;
 using BAL.Services.Master.GenderService;
-using BAL.Services.Master.IndentificationTypeServices;
+using BAL.Services.Master.IdentificationTypeServices;
 using BAL.Services.Master.MaritalStatusService;
 using BAL.Services.Master.MasterServices.AppointmentStatus;
 using BAL.Services.Master.MasterServices.Community;
@@ -46,6 +46,7 @@ using DinkToPdf.Contracts;
 using DinkToPdf;
 using BAL.Services.EmployeeOperations.EmployeePrintCV.Utility;
 using System.IO;
+using BAL.Services.Dashboard;
 
 namespace BAL.DependencyResolver
 {
@@ -111,6 +112,7 @@ namespace BAL.DependencyResolver
             services.AddScoped<IInServiceTrainingService, InServiceTrainingService>();
             services.AddScoped<IStateService, StateService>();
             services.AddScoped<IDistrictService, DistrictService>();
+            services.AddScoped<IDashboardService, DashboardService>();
 
 
             return services;

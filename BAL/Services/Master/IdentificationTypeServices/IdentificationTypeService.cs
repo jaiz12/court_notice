@@ -6,7 +6,7 @@ using System;
 using System.Data;
 using System.Threading.Tasks;
 
-namespace BAL.Services.Master.IndentificationTypeServices
+namespace BAL.Services.Master.IdentificationTypeServices
 {
     public class IdentificationTypeService : MyDbContext, IIdentificationTypeService
     {
@@ -18,7 +18,7 @@ namespace BAL.Services.Master.IndentificationTypeServices
 
         /// Author : Sandeep Chauhan
         /// Date : 03-11-2023
-        public async Task<DataTable> GetIndentificationType()
+        public async Task<DataTable> GetIdentificationType()
         {
             try
             {
@@ -39,21 +39,21 @@ namespace BAL.Services.Master.IndentificationTypeServices
 
         /// Author : Sandeep Chauhan
         /// Date : 03-11-2023
-        public DataResponse AddIndentificationType(IdentificationType_DTO model)
+        public DataResponse AddIdentificationType(IdentificationType_DTO model)
         {
             return _commonService.PostOrUpdate("emp_post_identification_type_master", "identification_type", model, false);
         }
 
         /// Author : Sandeep Chauhan
         /// Date : 03-11-2023
-        public DataResponse EditIndentificationType(IdentificationType_DTO model)
+        public DataResponse EditIdentificationType(IdentificationType_DTO model)
         {
             return _commonService.PostOrUpdate("emp_update_identification_type_master", "identification_type", model, true);
         }
 
         /// Author : Sandeep Chauhan
         /// Date : 03-11-2023
-        public async Task<DataResponse> DeleteIndentificationType(long id)
+        public async Task<DataResponse> DeleteIdentificationType(long id)
         {
             return await _commonService.Delete("emp_delete_identification_type_master", "identification_type", id);
         }

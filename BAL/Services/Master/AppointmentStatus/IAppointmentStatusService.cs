@@ -7,9 +7,9 @@ namespace BAL.Services.Master.MasterServices.AppointmentStatus
 {
     public interface IAppointmentStatusService
     {
-        List<AppointmentStatusDTO> Get();
-        public DataResponse Post(AppointmentStatusDTO item);
-        public DataResponse Update(AppointmentStatusDTO item);
+        public Task<List<AppointmentStatusDTO>> Get();
+        public Task<DataResponse> Post(AppointmentStatusDTO item);
+        public Task<DataResponse> Update(AppointmentStatusDTO item);
         public Task<DataResponse> Delete(long id);
     }
 }

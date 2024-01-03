@@ -18,5 +18,10 @@ namespace DTO.Models.Customization
         public string created_by { get; set; }
         public DateTime updated_on { get; set; }
         public string updated_by { get; set; }
+
+
+        //Author Pranai Giri 
+        public bool font_scheme { get; set; }
+
     }
 }

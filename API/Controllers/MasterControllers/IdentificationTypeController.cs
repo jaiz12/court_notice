@@ -1,6 +1,6 @@
 ﻿
 using API.Services;
-using BAL.Services.Master.IndentificationTypeServices;
+using BAL.Services.Master.IdentificationTypeServices;
 using DTO.Models.Auth;
 using DTO.Models.Master;
 using Microsoft.AspNetCore.Authorization;
@@ -28,8 +28,8 @@ namespace API.Controllers.MasterController
             _authoriseRoles = authoriseRoles;
         }
 
-        [HttpGet("GetIndentificationType/{userId}/{companyName}")]
-        public async Task<IActionResult> GetIndentificationType(string userId, string companyName)
+        [HttpGet("GetIdentificationType/{userId}/{companyName}")]
+        public async Task<IActionResult> GetIdentificationType(string userId, string companyName)
         {
             try
             {
@@ -42,7 +42,7 @@ namespace API.Controllers.MasterController
                 {
                     return BadRequest(ModelState);
                 }
-                var result = await _IdentificationTypeService.GetIndentificationType();
+                var result = await _IdentificationTypeService.GetIdentificationType();
                 return Ok(result);
             }
             catch
@@ -51,8 +51,8 @@ namespace API.Controllers.MasterController
             }
         }
 
-        [HttpPost("AddIndentificationType/{userId}/{companyName}")]
-        public async Task<IActionResult> AddIndentificationTypeAsync(IdentificationType_DTO model, string userId, string companyName)
+        [HttpPost("AddIdentificationType/{userId}/{companyName}")]
+        public async Task<IActionResult> AddIdentificationTypeAsync(IdentificationType_DTO model, string userId, string companyName)
         {
             try
             {
@@ -65,7 +65,7 @@ namespace API.Controllers.MasterController
                 {
                     return BadRequest(ModelState);
                 }
-                var result = _IdentificationTypeService.AddIndentificationType(model);
+                var result = _IdentificationTypeService.AddIdentificationType(model);
                 return Ok(new { result = result });
             }
             catch
@@ -74,8 +74,8 @@ namespace API.Controllers.MasterController
             }
         }
 
-        [HttpPut("EditIndentificationType/{userId}/{companyName}")]
-        public async Task<IActionResult> EditIndentificationTypeAsync(IdentificationType_DTO model, string userId, string companyName)
+        [HttpPut("EditIdentificationType/{userId}/{companyName}")]
+        public async Task<IActionResult> EditIdentificationTypeAsync(IdentificationType_DTO model, string userId, string companyName)
         {
             try
             {
@@ -88,7 +88,7 @@ namespace API.Controllers.MasterController
                 {
                     return BadRequest(ModelState);
                 }
-                var result = _IdentificationTypeService.EditIndentificationType(model);
+                var result = _IdentificationTypeService.EditIdentificationType(model);
                 return Ok(new { result = result });
             }
             catch
@@ -97,8 +97,8 @@ namespace API.Controllers.MasterController
             }
         }
 
-        [HttpDelete("DeleteIndentificationType/{userId}/{companyName}/{id}")]
-        public async Task<IActionResult> DeleteIndentificationType(string userId, string companyName, long id)
+        [HttpDelete("DeleteIdentificationType/{userId}/{companyName}/{id}")]
+        public async Task<IActionResult> DeleteIdentificationType(string userId, string companyName, long id)
         {
             try
             {
@@ -111,7 +111,7 @@ namespace API.Controllers.MasterController
                 {
                     return BadRequest(ModelState);
                 }
-                var result = await _IdentificationTypeService.DeleteIndentificationType(id);
+                var result = await _IdentificationTypeService.DeleteIdentificationType(id);
                 return Ok(new { result = result });
             }
             catch
