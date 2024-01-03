@@ -7,7 +7,7 @@ namespace BAL.Services.Customization.DashboardSkinService
 {
     public interface IDashboardSkinService
     {
-        Task<DataResponse> PostDashboardSkin(List<DashboardSkin_DTO> _dashboardSkin);
+        Task<DataResponse> PostOrUpdateDashboardSkin(List<DashboardSkin_DTO> _dashboardSkin);
         Task<DataResponse> PutDashboardSkin(List<DashboardSkin_DTO> _dashboardSkin);
         Task<List<DashboardSkin_DTO>> GetDashboardSkin();
     }

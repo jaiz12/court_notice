@@ -26,7 +26,7 @@ namespace API.Controllers.CustomizationController
             _roleManager = roleManager;
         }
         [HttpPost("PostDashboardSkin/{userId}/{companyName}")]
-        public async Task<IActionResult> PostDashboardSkin(List<DashboardSkin_DTO> dashboardSkin, string userId, string companyName)
+        public async Task<IActionResult> PostOrUpdateDashboardSkin(List<DashboardSkin_DTO> dashboardSkin, string userId, string companyName)
         {
             var userCompanyRoleValidate = await _authoriseRoles.AuthorizeUserRole(userId, companyName, "'Admin','Super Admin'", _roleManager, _userManager);
             if (!userCompanyRoleValidate)
@@ -35,7 +35,7 @@ namespace API.Controllers.CustomizationController
             }
             try
             {
-                var result = await _dashboardSkinService.PostDashboardSkin(dashboardSkin);
+                var result = await _dashboardSkinService.PostOrUpdateDashboardSkin(dashboardSkin);
                 return Ok(new { result = result });
             }
             catch
