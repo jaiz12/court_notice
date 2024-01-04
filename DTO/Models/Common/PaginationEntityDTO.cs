@@ -11,5 +11,6 @@ namespace DTO.Models.Common
         public int? pageSize { get; set; }
         public string? sortColumn { get; set; }
         public string? sortOrder { get; set; }
+        public long company_id { get; set; }
     }
 }
