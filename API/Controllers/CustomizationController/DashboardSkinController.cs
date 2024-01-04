@@ -25,7 +25,7 @@ namespace API.Controllers.CustomizationController
             _userManager = userManager;
             _roleManager = roleManager;
         }
-        [HttpPost("PostDashboardSkin/{userId}/{companyName}")]
+        [HttpPost("PostOrUpdateDashboardSkin/{userId}/{companyName}")]
         public async Task<IActionResult> PostOrUpdateDashboardSkin(List<DashboardSkin_DTO> dashboardSkin, string userId, string companyName)
         {
             var userCompanyRoleValidate = await _authoriseRoles.AuthorizeUserRole(userId, companyName, "'Admin','Super Admin'", _roleManager, _userManager);
