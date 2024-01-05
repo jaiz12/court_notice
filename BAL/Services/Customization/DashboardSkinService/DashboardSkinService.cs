@@ -58,52 +58,6 @@ namespace BAL.Services.Customization.DashboardSkinService
                 CloseContext();
             }
         }
-
-        public async Task<DataResponse> PutDashboardSkin(List<DashboardSkin_DTO> _dashboardSkin)
-        {
-            try
-            {
-                OpenContext();
-                List<DashboardSkin_DTO> noOfUpdateSuccess = new List<DashboardSkin_DTO>();
-                var item = false;
-                foreach (var skin in _dashboardSkin)
-                {
-                    _sqlCommand.Clear_CommandParameter();
-                    _sqlCommand.Add_Parameter_WithValue("prm_section_name", skin.section_name);
-                    _sqlCommand.Add_Parameter_WithValue("prm_company_name", skin.company_name);
-                    _sqlCommand.Add_Parameter_WithValue("prm_background_color", skin.background_color);
-                    _sqlCommand.Add_Parameter_WithValue("prm_font_color", skin.font_color);
-                    _sqlCommand.Add_Parameter_WithValue("prm_font_size", skin.font_size);
-                    _sqlCommand.Add_Parameter_WithValue("prm_image_height", skin.image_height);
-                    _sqlCommand.Add_Parameter_WithValue("prm_image_width", skin.image_width);
-                    _sqlCommand.Add_Parameter_WithValue("prm_text_alignment", skin.text_alignment);
-                    _sqlCommand.Add_Parameter_WithValue("prm_font_scheme", skin.font_scheme);
-
-                    _sqlCommand.Add_Parameter_WithValue("prm_updated_on", skin.updated_on = DateTime.Now);
-                    _sqlCommand.Add_Parameter_WithValue("prm_updated_by", skin.updated_by);
-
-                    item = await Task.Run(() => _sqlCommand.Execute_Query("skin_update_customize_dashboard", CommandType.StoredProcedure));
-
-                    noOfUpdateSuccess.Add(skin);
-                }
-                if (item)
-                {
-                    return new DataResponse("Dashboard Skin Varaints Updated & Applied Successfully", true);
-                }
-                else
-                {
-                    return new DataResponse("Failed To Implementing Dashboard Skin Varaints", false);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                CloseContext();
-            }
-        }
         public async Task<List<DashboardSkin_DTO>> GetDashboardSkin()
         {
             try
