@@ -43,24 +43,6 @@ namespace API.Controllers.CustomizationController
                 return BadRequest();
             }
         }
-        [HttpPut("PutDashboardSkin/{userId}/{companyName}")]
-        public async Task<IActionResult> PutDashboardSkin(List<DashboardSkin_DTO> dashboardSkin, string userId, string companyName)
-        {
-            var userCompanyRoleValidate = await _authoriseRoles.AuthorizeUserRole(userId, companyName, "'Admin','Super Admin'", _roleManager, _userManager);
-            if (!userCompanyRoleValidate)
-            {
-                return BadRequest(new { message = "Unauthorize User.", messageDescription = "You are not authorize to use the module. Please contact with your admin for the permission" });
-            }
-            try
-            {
-                var result = await _dashboardSkinService.PutDashboardSkin(dashboardSkin);
-                return Ok(new { result = result });
-            }
-            catch
-            {
-                return BadRequest();
-            }
-        }
         [HttpGet("GetDashboardSkin/{userId}/{companyName}")]
         public async Task<IActionResult> GetDashboardSkin(string userId, string companyName)
         {

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 
-namespace BAL.Services.ContentManagementSystem
+namespace BAL.Services.ContentManagementSystem.ContentManagementSystem
 {
     public interface IContentManagementSystemService
     {

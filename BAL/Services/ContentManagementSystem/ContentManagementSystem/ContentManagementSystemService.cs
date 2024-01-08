@@ -8,9 +8,9 @@ using System.Data;
 using Common.Utilities;
 using System.Diagnostics;
 
-namespace BAL.Services.ContentManagementSystem
+namespace BAL.Services.ContentManagementSystem.ContentManagementSystem
 {
-    public class ContentManagementSystemService: MyDbContext, IContentManagementSystemService
+    public class ContentManagementSystemService : MyDbContext, IContentManagementSystemService
     {
         public async Task<DataResponse> PostCMSDetails(ContentManagementSystem_DTO cmsDetails)
         {
@@ -35,7 +35,7 @@ namespace BAL.Services.ContentManagementSystem
                     return new DataResponse("CMS Details Already Exists", false);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -68,7 +68,7 @@ namespace BAL.Services.ContentManagementSystem
                     return new DataResponse("CMS Details Already Exists", false);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -95,7 +95,7 @@ namespace BAL.Services.ContentManagementSystem
                     return new DataResponse("Failed To Delete CMS Details", false);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -129,7 +129,7 @@ namespace BAL.Services.ContentManagementSystem
                 DataTable cmsDetailsDT = _sqlCommand.Select_Table("cms_getonload_content_management_system_details", CommandType.StoredProcedure);
                 return cmsDetailsDT;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
