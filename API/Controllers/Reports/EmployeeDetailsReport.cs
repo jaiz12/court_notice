@@ -7,6 +7,7 @@ using DTO.Models.Reports;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace API.Controllers.Reports
@@ -44,6 +45,16 @@ namespace API.Controllers.Reports
             }
             try
             {
+                var checkUserRoleManager = await _employeeDetailsReportService.checkUserRoleManager(userId, companyName, "'Manager'");
+
+                if(checkUserRoleManager.Rows.Count > 0)
+                {
+                    data.division_id = Convert.ToInt64(checkUserRoleManager.Rows[0]["division_id"]);
+                }
+                else
+                {
+                    data.division_id = data.division_id;
+                }
                 var result = await _employeeDetailsReportService.GetEmployeeDetailsReport(data);
                 return Ok(result);
             }
@@ -64,6 +75,16 @@ namespace API.Controllers.Reports
             }
             try
             {
+                var checkUserRoleManager = await _employeeDetailsReportService.checkUserRoleManager(userId, companyName, "'Manager'");
+
+                if (checkUserRoleManager.Rows.Count > 0)
+                {
+                    data.division_id = Convert.ToInt64(checkUserRoleManager.Rows[0]["division_id"]);
+                }
+                else
+                {
+                    data.division_id = data.division_id;
+                }
                 var result = await _employeeDetailsReportService.GetEmployeeServiceHistoryReport(data);
                 return Ok(result);
             }
@@ -83,6 +104,16 @@ namespace API.Controllers.Reports
             }
             try
             {
+                var checkUserRoleManager = await _employeeDetailsReportService.checkUserRoleManager(userId, companyName, "'Manager'");
+
+                if (checkUserRoleManager.Rows.Count > 0)
+                {
+                    data.division_id = Convert.ToInt64(checkUserRoleManager.Rows[0]["division_id"]);
+                }
+                else
+                {
+                    data.division_id = data.division_id;
+                }
                 var result = await _employeeDetailsReportService.GetEmployeeLeaveHistoryReport(data);
                 return Ok(result);
             }
