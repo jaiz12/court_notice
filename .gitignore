@@ -3,7 +3,7 @@
 /API/bin
 /ExceptionHandling/obj
 /API/API.csproj.user
-/API/assets/*
+/API/assets/employee
 /API/obj
 /BAL/bin
 /BAL/obj
@@ -14,4 +14,3 @@
 /BAL/bin
 /Common/bin
 /ExceptionHandling/bin
-/.vs/ProjectEvaluation/employeeprofile.metadata.v7.bin
