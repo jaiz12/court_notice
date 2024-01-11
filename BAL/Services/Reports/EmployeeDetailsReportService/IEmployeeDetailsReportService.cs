@@ -12,5 +12,6 @@ namespace BAL.Services.Reports.EmployeeDetailsReportService
         Task<DataTable> GetEmployeeDetailsReport(FilterReports data);
         Task<DataTable> GetEmployeeServiceHistoryReport(FilterReports data);
         Task<DataTable> GetEmployeeLeaveHistoryReport(EmpLeaveHistoryFilter data);
+        Task<DataTable> checkUserRoleManager(string userId, string company_name, string Name);
     }
 }

@@ -10,7 +10,7 @@ namespace DTO.Models.Employee
         public string nominee_name { get; set; }
         public DateTime date_of_birth { get; set; }
         public string relation { get; set; }
-        public int percentage { get; set; }
+        public decimal? percentage { get; set; }
         public long phone { get; set; }
         public string address { get; set; }
     }

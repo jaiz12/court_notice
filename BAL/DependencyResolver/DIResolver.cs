@@ -39,7 +39,6 @@ using BAL.Services.EmployeeOperations.EmployeeAwardService;
 using BAL.Services.EmployeeOperations.EmployeePromotionService;
 using BAL.Services.EmployeeOperations.EmployeeExtensionService;
 using BAL.Services.Reports.EmployeeDetailsReportService;
-using BAL.Services.ContentManagementSystem;
 using BAL.Services.EmployeeOperations.EmployeeBirthday;
 using BAL.Services.EmployeeOperations.EmployeePrintCV;
 using DinkToPdf.Contracts;
@@ -47,6 +46,8 @@ using DinkToPdf;
 using BAL.Services.EmployeeOperations.EmployeePrintCV.Utility;
 using System.IO;
 using BAL.Services.Dashboard;
+using BAL.Services.ContentManagementSystem.ContentManagementSystem;
+using BAL.Services.ContentManagementSystem.ContentMessageManagementSystem;
 
 namespace BAL.DependencyResolver
 {
@@ -102,6 +103,7 @@ namespace BAL.DependencyResolver
             services.AddScoped<IEmployeePromotionService, EmployeePromotionService>();
             services.AddScoped<IEmployeeExtension_TerminationService, EmployeeExtension_TerminationService>();
             services.AddScoped<IContentManagementSystemService, ContentManagementSystemService>();
+            services.AddScoped<IContentMessageManagementSystemService, ContentMessageManagementSystemService>();
 
             /* Added By : Sandeep Chauhan */
             services.AddScoped<ICasteService, CasteService>();

@@ -3,8 +3,10 @@ using DTO.Models.Reports;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace BAL.Services.Reports.EmployeeDetailsReportService
 {
@@ -183,6 +185,30 @@ namespace BAL.Services.Reports.EmployeeDetailsReportService
             catch(Exception ex)
             {
                 throw new Exception($"{ex.Message}");
+            }
+            finally
+            {
+                CloseContext();
+            }
+        }
+        public async Task<DataTable> checkUserRoleManager(string UserId, string company_name, string Name)
+        {
+            try
+            {
+                OpenContext();
+                _sqlCommand.Clear_CommandParameter();
+
+                string query = "select eSD.division_id from UserCompanyRoleMapping as uCRM " +
+                                "JOIN AspNetUsers as aNU on uCRM.UserId = aNU.Id " +
+                                "JOIN emp_employee_service_details as eSD on aNU.UserName = eSD.employee_id " +
+                                $"Where uCRM.UserId = '{UserId}' and uCRM.company_name = '{company_name}' and uCRM.Name IN ({Name}); ";
+
+                DataTable getUserRoleManagerDivisionIdDT = await Task.Run(() => _sqlCommand.Select_Table(query, CommandType.Text));
+                return getUserRoleManagerDivisionIdDT;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
             }
             finally
             {

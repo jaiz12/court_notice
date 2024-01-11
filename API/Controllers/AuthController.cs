@@ -540,7 +540,7 @@ namespace UserManagementAPI.Controllers
         }
 
         [HttpPost("ChangePassword/{userId}/{companyName}")]
-        public async Task<object> ChangePassword([FromBody] ChangePassword Data, string username, string userId, string companyName)
+        public async Task<object> ChangePassword([FromBody] ChangePassword Data, string userId, string companyName)
         {
             var userCompanyRoleValidate = await _authoriseRoles.AuthorizeUserRole(userId, companyName, "'Admin','Super Admin','Employee','Company Head','Manager'", _roleManager, _userManager);
             if (!userCompanyRoleValidate)
@@ -554,20 +554,30 @@ namespace UserManagementAPI.Controllers
 
             }
             Data.UpdatedOn = DateTime.Now;
-            if (Data.password == Data.confirmpassword)
+           
+            if (Data.newPassword == Data.confirmPassword)
             {
-                var userList = await _userManager.FindByNameAsync(username);
-                var result = await _userManager.ChangePasswordAsync(userList, Data.OldPassword, Data.password);
-                if (result.Succeeded)
+                var userList = await _userManager.FindByNameAsync(Data.userName);
+                var oldPassword = await _signInManager.PasswordSignInAsync(userList.UserName, Data.OldPassword, false, false);
+                if (oldPassword.Succeeded)
                 {
-                    await _emailSender.SendEmailAsync(companyName, userList.Email, "HRMS Change Password",
-                   "<b>Hello</b>,<br><br> <b> You have changed the password successfully HRMS </b><br>");
-                    return new Exception(errors = "Password Changed SuccessFully");
+                    var result = await _userManager.ChangePasswordAsync(userList, Data.OldPassword, Data.newPassword);
+                    if (result.Succeeded)
+                    {
+                        await _emailSender.SendEmailAsync(companyName, userList.Email, "HRMS Change Password",
+                       "<b>Hello</b>,<br><br> <b> You have changed the password successfully HRMS </b><br>");
+                        return Ok(new { message = "Password Change Successfully", messageDescription = "", messageType = "success" });
+                    }
+                    else
+                    {
+                        return Ok(new { message = "Password Change Failed", messageDescription = "", messageType = "error" });
+                    }
                 }
                 else
                 {
-                    return Ok(new { message = "Password Change SuccessFully", messageDescription = "", messageType = "success" });
+                    return Ok(new { message = "Old Password Doesn't Match", messageDescription = "", messageType = "error" });
                 }
+              
             }
             else
             {

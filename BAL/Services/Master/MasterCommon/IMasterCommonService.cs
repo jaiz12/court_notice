@@ -15,6 +15,14 @@ namespace BAL.Services.Master.Common
         public DataTable Get(string spName);
 
         /// <summary>
+        /// SELECT : Pass Query to return master details which uses MasterDTO Model
+        /// </summary>
+        /// <param name="spName">Stored Procedure Name</param>
+        /// <author>Pranai Giri</author>
+        /// <date>2023-11-02</date>
+        public DataTable GetDataTableByQuery(string query);
+
+        /// <summary>
         /// INSERT/UPDATE/ARCHIVE : Pass Stored Procedure Name and your Master Data which uses MasterDTO
         /// </summary>
         /// <param name="spName">Stored Procedure Name</param>

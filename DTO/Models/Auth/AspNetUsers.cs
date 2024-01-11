@@ -111,12 +111,13 @@ namespace DTO.Models.Auth
     public class ChangePassword
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public string userName { get; set; }
         [Required(ErrorMessage = "Old Password cannot be empty")]
         public string OldPassword { get; set; }
         [Required(ErrorMessage = "Password cannot be empty")]
-        public string password { get; set; }
+        public string newPassword { get; set; }
         [Required(ErrorMessage = "Password cannot be empty")]
-        public string confirmpassword { get; set; }
+        public string confirmPassword { get; set; }
         public string UpdatedBy { get; set; }
         public DateTime UpdatedOn { get; set; }
         public string Id { get; set; }
