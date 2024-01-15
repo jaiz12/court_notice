@@ -9,6 +9,8 @@ using System.Globalization;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using System.Xml.Linq;
 
 namespace BAL.Services.Master.Common
 {
@@ -36,6 +38,38 @@ namespace BAL.Services.Master.Common
                 CloseContext();
             }
         }
+
+
+        public DataTable GetDataTableByQuery(string query)
+        {
+            lock (_lockConfig.connectionStringLockObj)
+            {
+                using (SqlConnection connection = new SqlConnection(_lockConfig.GetConnectionString()))
+                {
+                    try
+                    {
+                        connection.Open();
+
+                        using (SqlCommand command = new SqlCommand(query, connection))
+                        {
+                            using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                            {
+                                DataTable result = new DataTable();
+                                adapter.Fill(result);
+                                return result;
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        // Log the exception or handle it appropriately.
+                        throw new Exception(ex.Message);
+                    }
+                }
+            }
+        }
+
+
 
         public DataResponse PostOrUpdate(string spName, string? columnNameInitial, dynamic item, bool isUpdate)
         {

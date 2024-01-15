@@ -184,5 +184,21 @@ namespace API.Controllers.MasterController
         }
 
 
+        [HttpGet("GetAllCompanyLogoUrl")]
+        [AllowAnonymous]
+        public IActionResult GetAllCompanyLogoUrl()
+        {
+            try
+            {
+                var result = _companyService.GetAllCompanyLogoUrl();
+                return Ok(result);
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
+
     }
 }
