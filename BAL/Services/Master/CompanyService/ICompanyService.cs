@@ -11,5 +11,7 @@ namespace BAL.Services.Master.CompanyService
         DataResponse AddCompany(Company_DTO model);
         DataResponse EditCompany(Company_DTO model);
         Task<DataResponse> DeleteCompany(long id);
+
+        DataTable GetAllCompanyLogoUrl();
     }
 }

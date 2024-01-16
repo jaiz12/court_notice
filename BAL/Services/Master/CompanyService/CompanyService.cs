@@ -60,5 +60,21 @@ namespace BAL.Services.Master.CompanyService
         {
             return await _commonService.Delete("emp_delete_company_master", "company", id);
         }
+
+        public DataTable GetAllCompanyLogoUrl()
+        {
+            string query = @"
+                            SELECT CM.[company_name]
+                            ,CM.[company_logo_url]
+	                        ,CDS.background_color
+                            FROM [emp_company_master] CM
+                            LEFT JOIN 
+                            [customize_dashboard_skin] CDS
+                            ON CM.company_name = CDS.company_name
+                            WHERE CDS.section_name = 'Brand_logo' OR CDS.section_name IS NULL";
+
+            return _commonService.GetDataTableByQuery(query);
+        }
+
     }
 }

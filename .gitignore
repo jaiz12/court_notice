@@ -1,5 +1,5 @@
 .vs
-/.vs
+/.vs/*
 /API/bin
 /ExceptionHandling/obj
 /API/API.csproj.user
