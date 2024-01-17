@@ -126,6 +126,9 @@ namespace BAL.Services.ContentManagementSystem.ContentMessageManagementSystem
             try
             {
                 OpenContext();
+                _sqlCommand.Clear_CommandParameter();
+                DateTime currentDate = DateTime.Now;
+                _sqlCommand.Add_Parameter_WithValue("prm_currentDate", Convert.ToDateTime(currentDate).ToString("yyyy-MM-dd"));
                 DataTable messageForLoginDT = await Task.Run(()=> _sqlCommand.Select_Table("cms_getforlogin_content_message_management_system_details", CommandType.StoredProcedure));
                 return messageForLoginDT;
             }
