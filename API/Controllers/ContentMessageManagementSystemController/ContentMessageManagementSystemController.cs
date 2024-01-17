@@ -111,7 +111,7 @@ namespace API.Controllers.ContentMessageManagementSystemController
         [HttpGet("GetCmsMessageForLogin/{userId}/{companyName}")]
         public async Task<IActionResult> GetCmsMessageForLogin(string userId, string companyName)
         {
-            var userCompanyRoleValidate = await _authoriseRoles.AuthorizeUserRole(userId, companyName, "'Company Head','Super Admin'", _roleManager, _userManager);
+            var userCompanyRoleValidate = await _authoriseRoles.AuthorizeUserRole(userId, companyName, "'Company Head','Super Admin', 'Employee'", _roleManager, _userManager);
             if (!userCompanyRoleValidate)
             {
                 return BadRequest(new { message = "Unauthorize User.", messageDescription = "You are not authorize to use the module. Please contact with your admin for the permission" });
