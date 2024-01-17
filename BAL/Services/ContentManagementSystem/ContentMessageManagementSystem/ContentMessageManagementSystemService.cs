@@ -108,8 +108,26 @@ namespace BAL.Services.ContentManagementSystem.ContentMessageManagementSystem
             {
                 OpenContext();
 
-                DataTable messageDT = _sqlCommand.Select_Table("cms_get_content_message_management_system_details", CommandType.StoredProcedure);
+                DataTable messageDT = await Task.Run(() => _sqlCommand.Select_Table("cms_get_content_message_management_system_details", CommandType.StoredProcedure));
                 return messageDT;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                CloseContext();
+            }
+        }
+
+        public async Task<DataTable> GetCmsMessageForLogin()
+        {
+            try
+            {
+                OpenContext();
+                DataTable messageForLoginDT = await Task.Run(()=> _sqlCommand.Select_Table("cms_getforlogin_content_message_management_system_details", CommandType.StoredProcedure));
+                return messageForLoginDT;
             }
             catch(Exception ex)
             {
