@@ -52,7 +52,7 @@ namespace BAL.Services.ContentManagementSystem.ContentMessageManagementSystem
                 _sqlCommand.Add_Parameter_WithValue("prm_message_id", message.message_id);
                 _sqlCommand.Add_Parameter_WithValue("prm_message", message.message);
                 _sqlCommand.Add_Parameter_WithValue("prm_updated_on", message.updated_on = DateTime.Now);
-                _sqlCommand.Add_Parameter_WithValue("prm_updated_by", message.updated_on);
+                _sqlCommand.Add_Parameter_WithValue("prm_updated_by", message.updated_by);
 
                 var item = await Task.Run(() => _sqlCommand.Execute_Query("cms_update_content_message_management_system_details", CommandType.StoredProcedure));
                 if (item)
