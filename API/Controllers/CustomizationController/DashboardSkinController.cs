@@ -48,7 +48,7 @@ namespace API.Controllers.CustomizationController
         {
             try
             {
-                var userCompanyRoleValidate = await _authoriseRoles.AuthorizeUserRole(userId, companyName, "'Admin','Super Admin', 'Company Head', 'Employee', 'Manager'", _roleManager, _userManager);
+                var userCompanyRoleValidate = await _authoriseRoles.AuthorizeUserRole(userId, companyName, "'Admin','Super Admin','Leave Admin', 'Company Head', 'Employee', 'Manager'", _roleManager, _userManager);
                 if (!userCompanyRoleValidate)
                 {
                     return BadRequest(new { message = "Unauthorize User.", messageDescription = "You are not authorize to use the module. Please contact with your admin for the permission" });
