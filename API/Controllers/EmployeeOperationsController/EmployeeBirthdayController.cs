@@ -2,6 +2,7 @@
 using BAL.Services.EmployeeOperations.EmployeeBirthday;
 using BAL.Services.Master.BoardsService;
 using DTO.Models.Auth;
+using DTO.Models.Employee;
 using DTO.Models.Master;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -50,6 +51,54 @@ namespace API.Controllers.EmployeeOperationsController
             return Ok(new { result = birthday });
         }
 
-        
+        [HttpGet("GetBirthdayComment/{employee_id}/{userId}/{companyName}")]
+        public async Task<IActionResult> GetBirthdayComment(string userId, string companyName, string employee_id)
+        {
+            var userCompanyRoleValidate = await _authoriseRoles.AuthorizeUserRole(userId, companyName, "'Admin','Super Admin', 'Company Head', 'Employee', 'Manager'", _roleManager, _userManager);
+            if (!userCompanyRoleValidate)
+            {
+                return BadRequest(new { message = "Unauthorize User.", messageDescription = "You are not authorize to use the module. Please contact with your admin for the permission" });
+            }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var birthday = await _IEmployeeBirthdayService.GetBirthdayComment(employee_id);
+            return Ok(new { result = birthday });
+        }
+
+        [HttpPost("PostBirthdayComment/{userId}/{companyName}")]
+        public async Task<IActionResult> Post(EmployeeBirthday_DTO data, string userId, string companyName)
+        {
+            var userCompanyRoleValidate = await _authoriseRoles.AuthorizeUserRole(userId, companyName, "'Admin','Super Admin', 'Company Head', 'Employee', 'Manager'" ,_roleManager, _userManager);
+            if (!userCompanyRoleValidate)
+            {
+                return BadRequest(new { message = "Unauthorize User.", messageDescription = "You are not authorize to use the module. Please contact with your admin for the permission" });
+            }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var comment = await _IEmployeeBirthdayService.Post(data);
+            return Ok(new { result = comment });
+        }
+
+        [HttpDelete("DeleteBirthdayComment/{userId}/{companyName}/{id}")]
+        public async Task<IActionResult> Delete(long id, string userId, string companyName)
+        {
+            var userCompanyRoleValidate = await _authoriseRoles.AuthorizeUserRole(userId, companyName, "'Admin','Super Admin', 'Company Head', 'Employee', 'Manager'", _roleManager, _userManager);
+            if (!userCompanyRoleValidate)
+            {
+                return BadRequest(new { message = "Unauthorize User.", messageDescription = "You are not authorize to use the module. Please contact with your admin for the permission" });
+            }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var comment = await _IEmployeeBirthdayService.Delete(id);
+            return Ok(new { result = comment });
+        }
+
+
     }
 }

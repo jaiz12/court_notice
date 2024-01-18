@@ -1,5 +1,6 @@
 ﻿using Common.DbContext;
 using Common.Utilities;
+using DTO.Models;
 using DTO.Models.Employee;
 using DTO.Models.Master;
 using System;
@@ -22,6 +23,93 @@ namespace BAL.Services.EmployeeOperations.EmployeeBirthday
                 List<EmployeeBirthday_DTO> birthdayList = new List<EmployeeBirthday_DTO>();
                 birthdayList = DataTableVsListOfType.ConvertDataTableToList<EmployeeBirthday_DTO>(birthdayDT);
                 return birthdayList;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                CloseContext();
+            }
+        }
+
+        public async Task<DataTable> GetBirthdayComment(string employee_id)
+        {
+            try
+            {
+                OpenContext();
+                _sqlCommand.Clear_CommandParameter();
+                _sqlCommand.Add_Parameter_WithValue("prm_employee_id", employee_id);
+
+                DataTable commentDT = await Task.Run(() => _sqlCommand.Select_Table("emp_get_birthday_comment", CommandType.StoredProcedure));
+
+                return commentDT;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                CloseContext();
+            }
+        }
+
+        public async Task<DataResponse> Post(EmployeeBirthday_DTO data)
+        {
+            try
+            {
+                OpenContext();
+                _sqlCommand.Clear_CommandParameter();                
+                _sqlCommand.Add_Parameter_WithValue("prm_comment", data.comment);
+                _sqlCommand.Add_Parameter_WithValue("prm_created_on", DateTime.Now);
+
+                if (data.birthday_comment_id == 0)
+                {
+                    _sqlCommand.Add_Parameter_WithValue("prm_employee_id", data.employee_id);
+                    _sqlCommand.Add_Parameter_WithValue("prm_comment_employee_id", data.comment_employee_id);
+                    var insert = await Task.Run(() => _sqlCommand.Execute_Query("emp_post_birthday_comment", CommandType.StoredProcedure));
+                    if (insert)
+                        return new DataResponse("Comment Added Successfully", true);
+                    else
+                        return new DataResponse("Comment Already Exists", false);
+                }
+                else
+                {
+                    _sqlCommand.Add_Parameter_WithValue("prm_birthday_comment_id", data.birthday_comment_id);
+                   
+                    var update = await Task.Run(() => _sqlCommand.Execute_Query("emp_update_birthday_comment", CommandType.StoredProcedure));
+                    if (update)
+                        return new DataResponse("Comment Updated Successfully", true);
+                    else
+                        return new DataResponse("Comment Already Exists", false);
+                }
+                   
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                CloseContext();
+            }
+        }
+
+        public async Task<DataResponse> Delete(long id)
+        {
+            try
+            {
+                OpenContext();
+                _sqlCommand.Clear_CommandParameter();
+                _sqlCommand.Add_Parameter_WithValue("@prm_birthday_comment_id", id);
+
+                var item = await Task.Run(() => _sqlCommand.Execute_Query("emp_delete_birthday_comment", CommandType.StoredProcedure));
+                if (item)
+                    return new DataResponse("Comment Deleted Successfully", true);
+                else
+                    return new DataResponse("Failed To Delete Comment", false);
             }
             catch (Exception ex)
             {

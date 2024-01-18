@@ -1,6 +1,7 @@
 using API.Configurations;
 using API.Services;
 using BAL.DependencyResolver;
+using BAL.Services.Chathub;
 using Common.DataContext;
 using DTO.Models.Auth;
 using ExceptionHandling.DependencyResolver;
@@ -40,6 +41,8 @@ namespace API
             services.AddControllers().AddNewtonsoftJson(options =>
             options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             );// for 3.1
+
+
             services.AddCors(options =>
             {
                 options.AddPolicy(MyAllowSpecificOrigins,
@@ -50,6 +53,9 @@ namespace API
                     .AllowAnyMethod();
                 });
             });
+
+
+            services.AddSignalR();
 
             //Dependencies resolver
             services.DIBALResolver();
@@ -143,6 +149,7 @@ namespace API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<ChatHub>("/chatHub");
             }); // for 3.1
                 // ===== Create tables ====== 
         }
