@@ -13,5 +13,6 @@ namespace BAL.Services.ContentManagementSystem.ContentManagementSystem
         Task<DataResponse> DeleteCMSDetails(long cms_id);
         Task<DataTable> GetCMSDetails();
         Task<DataTable> GetCMSDetailsOnLoad();
+        Task<DataTable> GetCmsNoticeCount();
     }
 }

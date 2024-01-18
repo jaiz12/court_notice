@@ -15,5 +15,7 @@ namespace BAL.Services.ContentManagementSystem.ContentMessageManagementSystem
         Task<DataResponse> DeleteCmsMessage(long message_id);
         Task<DataTable> GetCmsMessage();
         Task<DataTable> GetCmsMessageForLogin();
+
+        Task<DataTable> GetCmsMessageCount();
     }
 }

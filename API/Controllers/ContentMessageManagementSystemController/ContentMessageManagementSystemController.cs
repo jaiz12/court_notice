@@ -38,8 +38,7 @@ namespace API.Controllers.ContentMessageManagementSystemController
         [HttpPost("PostCmsMessage/{userId}/{companyName}")]
         public async Task<IActionResult> PostCmsMessage(ContentMessageManagementSystem_DTO message, string userId, string companyName)
         {
-            var userCompanyRoleValidate = await _authoriseRoles.AuthorizeUserRole(userId, companyName, "'Company Head','Super Admin'", _roleManager, _userManager);
-            if (!userCompanyRoleValidate)
+            var userCompanyRoleValidate = await _authoriseRoles.AuthorizeUserRole(userId, companyName, "'Admin','Super Admin','Leave Admin', 'Company Head', 'Employee', 'Manager'", _roleManager, _userManager); if (!userCompanyRoleValidate)
             {
                 return BadRequest(new { message = "Unauthorize User.", messageDescription = "You are not authorize to use the module. Please contact with your admin for the permission" });
             }
@@ -56,8 +55,7 @@ namespace API.Controllers.ContentMessageManagementSystemController
         [HttpPut("PutCmsMessage/{userId}/{companyName}")]
         public async Task<IActionResult> PutCmsMessage(ContentMessageManagementSystem_DTO message, string userId, string companyName)
         {
-            var userCompanyRoleValidate = await _authoriseRoles.AuthorizeUserRole(userId, companyName, "'Company Head','Super Admin'", _roleManager, _userManager);
-            if (!userCompanyRoleValidate)
+            var userCompanyRoleValidate = await _authoriseRoles.AuthorizeUserRole(userId, companyName, "'Admin','Super Admin','Leave Admin', 'Company Head', 'Employee', 'Manager'", _roleManager, _userManager); if (!userCompanyRoleValidate)
             {
                 return BadRequest(new { message = "Unauthorize User.", messageDescription = "You are not authorize to use the module. Please contact with your admin for the permission" });
             }
@@ -74,8 +72,7 @@ namespace API.Controllers.ContentMessageManagementSystemController
         [HttpDelete("DeleteCmsMessage/{userId}/{companyName}/{message_id}")]
         public async Task<IActionResult> DeleteCmsMessage(long message_id, string userId, string companyName)
         {
-            var userCompanyRoleValidate = await _authoriseRoles.AuthorizeUserRole(userId, companyName, "'Company Head','Super Admin'", _roleManager, _userManager);
-            if (!userCompanyRoleValidate)
+            var userCompanyRoleValidate = await _authoriseRoles.AuthorizeUserRole(userId, companyName, "'Admin','Super Admin','Leave Admin', 'Company Head', 'Employee', 'Manager'", _roleManager, _userManager); if (!userCompanyRoleValidate)
             {
                 return BadRequest(new { message = "Unauthorize User.", messageDescription = "You are not authorize to use the module. Please contact with your admin for the permission" });
             }
@@ -92,8 +89,7 @@ namespace API.Controllers.ContentMessageManagementSystemController
         [HttpGet("GetCmsMessage/{userId}/{companyName}")]
         public async Task<IActionResult> GetCmsMessage(string userId, string companyName)
         {
-            var userCompanyRoleValidate = await _authoriseRoles.AuthorizeUserRole(userId, companyName, "'Company Head','Super Admin'", _roleManager, _userManager);
-            if (!userCompanyRoleValidate)
+            var userCompanyRoleValidate = await _authoriseRoles.AuthorizeUserRole(userId, companyName, "'Admin','Super Admin','Leave Admin', 'Company Head', 'Employee', 'Manager'", _roleManager, _userManager); if (!userCompanyRoleValidate)
             {
                 return BadRequest(new { message = "Unauthorize User.", messageDescription = "You are not authorize to use the module. Please contact with your admin for the permission" });
             }
@@ -111,14 +107,31 @@ namespace API.Controllers.ContentMessageManagementSystemController
         [HttpGet("GetCmsMessageForLogin/{userId}/{companyName}")]
         public async Task<IActionResult> GetCmsMessageForLogin(string userId, string companyName)
         {
-            var userCompanyRoleValidate = await _authoriseRoles.AuthorizeUserRole(userId, companyName, "'Company Head','Super Admin', 'Employee'", _roleManager, _userManager);
-            if (!userCompanyRoleValidate)
+            var userCompanyRoleValidate = await _authoriseRoles.AuthorizeUserRole(userId, companyName, "'Admin','Super Admin','Leave Admin', 'Company Head', 'Employee', 'Manager'", _roleManager, _userManager); if (!userCompanyRoleValidate)
             {
                 return BadRequest(new { message = "Unauthorize User.", messageDescription = "You are not authorize to use the module. Please contact with your admin for the permission" });
             }
             try
             {
                 var result = await _contentMessageManagementSystemService.GetCmsMessageForLogin();
+                return Ok(result);
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet("GetCmsMessageCount/{userId}/{companyName}")]
+        public async Task<IActionResult> GetCmsMessageCount(string userId, string companyName)
+        {
+            var userCompanyRoleValidate = await _authoriseRoles.AuthorizeUserRole(userId, companyName, "'Admin','Super Admin','Leave Admin', 'Company Head', 'Employee', 'Manager'", _roleManager, _userManager); if (!userCompanyRoleValidate)
+            {
+                return BadRequest(new { message = "Unauthorize User.", messageDescription = "You are not authorize to use the module. Please contact with your admin for the permission" });
+            }
+            try
+            {
+                var result = await _contentMessageManagementSystemService.GetCmsMessageCount();
                 return Ok(result);
             }
             catch

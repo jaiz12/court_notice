@@ -141,5 +141,26 @@ namespace BAL.Services.ContentManagementSystem.ContentMessageManagementSystem
                 CloseContext();
             }
         }
+
+        public async Task<DataTable> GetCmsMessageCount()
+        {
+            try
+            {
+                OpenContext();
+                DateTime currentDate = DateTime.Now;
+                _sqlCommand.Clear_CommandParameter();
+                _sqlCommand.Add_Parameter_WithValue("prm_currentDate", currentDate);
+                DataTable messageCount = await Task.Run(() => _sqlCommand.Select_Table("cms_get_message_count", CommandType.StoredProcedure));
+                return messageCount;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                CloseContext();
+            }
+        }
     }
 }
