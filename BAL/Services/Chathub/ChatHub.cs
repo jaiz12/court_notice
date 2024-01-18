@@ -32,8 +32,8 @@ public class ChatHub : Hub
             await _commonService.PostOrUpdateAsync("chathub_post", chatMessage, false);
 
             // Broadcast the message
-            await Clients.All.SendAsync(name, message);
-            await OnConnectedAsync();
+            List<ChatHubDTO> chatMessages = await _commonService.GetListByIdAsync<ChatHubDTO>("chathub_get", null, null);
+            await Clients.All.SendAsync("ReceiveMessage", chatMessages);
 
         }
 
