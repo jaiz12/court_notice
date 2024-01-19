@@ -123,5 +123,23 @@ namespace API.Controllers.ContentManagementSystemController
                 return BadRequest();
             }
         }
+        [HttpGet("GetCmsNoticeCount/{userId}/{companyName}")]
+        public async Task<IActionResult> GetCmsNoticeCount(string userId, string companyName)
+        {
+            var userCompanyRoleValidate = await _authoriseRoles.AuthorizeUserRole(userId, companyName, "'Admin','Super Admin','Leave Admin', 'Company Head', 'Employee', 'Manager'", _roleManager, _userManager);
+            if (!userCompanyRoleValidate)
+            {
+                return BadRequest(new { message = "Unauthorize User.", messageDescription = "You are not authorize to use the module. Please contact with your admin for the permission" });
+            }
+            try
+            {
+                var result = await _contentManagementSystemService.GetCmsNoticeCount();
+                return Ok(result);
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
     }
 }
