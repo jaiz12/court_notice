@@ -1,6 +1,7 @@
 using API.Configurations;
 using API.Services;
 using BAL.DependencyResolver;
+using BAL.Services.BirthdayWish;
 using BAL.Services.Chathub;
 using Common.DataContext;
 using DTO.Models.Auth;
@@ -150,6 +151,7 @@ namespace API
             {
                 endpoints.MapControllers();
                 endpoints.MapHub<ChatHub>("/chatHub");
+                endpoints.MapHub<BirthdayWishes>("/BirthdayWishes");
             }); // for 3.1
                 // ===== Create tables ====== 
         }
