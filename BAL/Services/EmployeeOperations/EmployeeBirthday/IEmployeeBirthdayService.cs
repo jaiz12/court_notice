@@ -1,4 +1,5 @@
 ﻿using DTO.Models;
+using DTO.Models.BirthdayWishes;
 using DTO.Models.Employee;
 using System;
 using System.Collections.Generic;
@@ -14,5 +15,6 @@ namespace BAL.Services.EmployeeOperations.EmployeeBirthday
         Task<DataTable> GetBirthdayComment(string employee_id);
         Task<DataResponse> Post(EmployeeBirthday_DTO data);
         Task<DataResponse> Delete(long data);
+        Task<List<BirthdayListForRealTimeDTO>> GetBirthdayListForRealTimeChat();
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Common.DbContext;
 using Common.Utilities;
 using DTO.Models;
+using DTO.Models.BirthdayWishes;
 using DTO.Models.Employee;
 using DTO.Models.Master;
 using System;
@@ -110,6 +111,28 @@ namespace BAL.Services.EmployeeOperations.EmployeeBirthday
                     return new DataResponse("Comment Deleted Successfully", true);
                 else
                     return new DataResponse("Failed To Delete Comment", false);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                CloseContext();
+            }
+        }
+
+
+        public async Task<List<BirthdayListForRealTimeDTO>> GetBirthdayListForRealTimeChat()
+        {
+            try
+            {
+                OpenContext();
+                _sqlCommand.Clear_CommandParameter();
+                DataTable birthdayDT = await _sqlCommand.ExecuteStoredProcedureAsync("emp_get_employee_birthday_for_real_time_chat", CommandType.StoredProcedure);
+                List<BirthdayListForRealTimeDTO> birthdayList = new List<BirthdayListForRealTimeDTO>();
+                birthdayList = DataTableVsListOfType.ConvertDataTableToList<BirthdayListForRealTimeDTO>(birthdayDT);
+                return birthdayList;
             }
             catch (Exception ex)
             {

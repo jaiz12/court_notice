@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace DTO.Models.Employee
@@ -19,6 +20,9 @@ namespace DTO.Models.Employee
         public long state_id { get; set; }
         public string state_name { get; set; }
         public DateTime? created_on { get; set; }
+
+        [Required(ErrorMessage = "Message content is required.")]
+        [StringLength(100, MinimumLength = 1, ErrorMessage = "Message must be between 1 and 100 characters.")]
         public string comment { get; set; }
         public string comment_employee_id { get; set; }
         public string emp_first_name { get; set; }

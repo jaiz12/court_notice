@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace API.Controllers.EmployeeOperationsController
 {
+
     [Route("api/[controller]")]
     [Authorize]
     [ApiController]
@@ -99,6 +100,25 @@ namespace API.Controllers.EmployeeOperationsController
             return Ok(new { result = comment });
         }
 
+
+        /// <summary>
+        /// Controller For Real Time Birthday Chat - Pranai Giri - 20 JAN 2024
+        /// </summary>
+        [HttpGet("GetBirthdayListForRealTimeChat/{userId}/{companyName}")]
+        public async Task<IActionResult> GetBirthdayListForRealTimeChat(string userId, string companyName)
+        {
+            var userCompanyRoleValidate = await _authoriseRoles.AuthorizeUserRole(userId, companyName, "'Admin','Super Admin', 'Company Head', 'Employee', 'Manager'", _roleManager, _userManager);
+            if (!userCompanyRoleValidate)
+            {
+                return BadRequest(new { message = "Unauthorize User.", messageDescription = "You are not authorize to use the module. Please contact with your admin for the permission" });
+            }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var birthday = await _IEmployeeBirthdayService.GetBirthdayListForRealTimeChat();
+            return Ok(birthday);
+        }
 
     }
 }
