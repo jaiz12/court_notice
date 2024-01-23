@@ -1,6 +1,8 @@
 ﻿using BAL.Services.Common;
+using DTO.Models;
 using DTO.Models.BirthdayWishes;
 using DTO.Models.Employee;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.SignalR;
 using System;
@@ -24,9 +26,24 @@ namespace BAL.Services.BirthdayWish
 
         public async Task Send(BirthdayWishesDTO birthdayWish)
         {
-            await _commonService.PostOrUpdateAsync("emp_post_birthday_comment", birthdayWish, false);
+            if(birthdayWish.birthday_comment_id > 0)
+            {
+                await _commonService.PostOrUpdateAsync("emp_update_birthday_comment", birthdayWish, true);
+            }
+            else
+            {
+                await _commonService.PostOrUpdateAsync("emp_post_birthday_comment", birthdayWish, false);
+            }
             await BroadCastBirthdayBoyWishes(birthdayWish.employee_id);
         }
+
+        public async Task Delete(BirthdayWishesDTO birthdayWish)
+        {
+            DataResponse res = await Task.Run(() => _commonService.DeleteById("emp_delete_birthday_comment", "prm_birthday_comment_id", birthdayWish.birthday_comment_id));
+            await Clients.All.SendAsync("DeleteCompleted", res);
+            //await BroadCastBirthdayBoyWishes(birthdayWish.employee_id);
+        }
+
 
         public override async Task OnConnectedAsync()
         {
