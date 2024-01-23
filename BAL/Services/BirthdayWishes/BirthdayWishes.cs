@@ -40,8 +40,8 @@ namespace BAL.Services.BirthdayWish
         public async Task Delete(BirthdayWishesDTO birthdayWish)
         {
             DataResponse res = await Task.Run(() => _commonService.DeleteById("emp_delete_birthday_comment", "prm_birthday_comment_id", birthdayWish.birthday_comment_id));
-            await Clients.All.SendAsync("DeleteCompleted", res);
-            //await BroadCastBirthdayBoyWishes(birthdayWish.employee_id);
+            await Clients.Caller.SendAsync("DeleteCompleted", res);
+            await BroadCastBirthdayBoyWishes(birthdayWish.employee_id);
         }
 
 
