@@ -1,5 +1,5 @@
 ﻿using DTO.Models;
-using DTO.Models.BirthdayWishes;
+using DTO.Models.BirthdayWishesDTO;
 using DTO.Models.Employee;
 using System;
 using System.Collections.Generic;

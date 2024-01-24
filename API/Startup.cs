@@ -2,7 +2,6 @@ using API.Configurations;
 using API.Services;
 using BAL.DependencyResolver;
 using BAL.Services.BirthdayWish;
-using BAL.Services.Chathub;
 using Common.DataContext;
 using DTO.Models.Auth;
 using ExceptionHandling.DependencyResolver;
@@ -151,8 +150,7 @@ namespace API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHub<ChatHub>("/chatHub");
-                endpoints.MapHub<BirthdayWishes>("/BirthdayWishes");
+                endpoints.MapHub<BirthdayWishService>("/BirthdayWishes");
             }); // for 3.1
                 // ===== Create tables ====== 
         }

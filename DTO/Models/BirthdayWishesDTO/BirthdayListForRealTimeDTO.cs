@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DTO.Models.BirthdayWishes
+namespace DTO.Models.BirthdayWishesDTO
 {
     public class BirthdayListForRealTimeDTO
     {

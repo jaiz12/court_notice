@@ -1,7 +1,7 @@
 ﻿using Common.DbContext;
 using Common.Utilities;
 using DTO.Models;
-using DTO.Models.BirthdayWishes;
+using DTO.Models.BirthdayWishesDTO;
 using DTO.Models.Employee;
 using DTO.Models.Master;
 using System;
