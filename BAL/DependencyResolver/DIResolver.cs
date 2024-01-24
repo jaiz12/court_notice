@@ -32,8 +32,6 @@ using BAL.Services.RolesCompanyPermission;
 using Common.Configuration;
 using DTO.Models.Master;
 using Microsoft.Extensions.DependencyInjection;
-using BAL.Services.RolesCompanyPermission;
-using BAL.Services.Customization.DashboardSkinService;
 using BAL.Services.Master.PlaceOfPostingService;
 using BAL.Services.EmployeeOperations.EmployeeAwardService;
 using BAL.Services.EmployeeOperations.EmployeePromotionService;
@@ -48,6 +46,7 @@ using System.IO;
 using BAL.Services.Dashboard;
 using BAL.Services.ContentManagementSystem.ContentManagementSystem;
 using BAL.Services.ContentManagementSystem.ContentMessageManagementSystem;
+using BAL.Services.BirthdayWish;
 
 namespace BAL.DependencyResolver
 {
@@ -84,10 +83,11 @@ namespace BAL.DependencyResolver
             services.AddScoped<ICourseService, CourseService>();
             services.AddScoped<ICommonService, CommonService>();
             services.AddScoped<IEmployeePrintCVService, EmployeePrintCVService>();
-
             var context = new CustomAssemblyLoadContext();
             context.LoadUnmanagedLibrary(Path.Combine(Directory.GetCurrentDirectory(), "libwkhtmltox.dll"));
             services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
+            services.AddTransient<BirthdayWishes>();
+
 
             /* Added By : Mukesh Shah */
             services.AddScoped<IGenderService, GenderService>();
