@@ -23,7 +23,7 @@ namespace API.Controllers.EmployeeControllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IAuthoriseRoles _authoriseRoles;
-        private readonly string userRoles = "'Admin','Employee', 'Company Head', 'Manager'";
+        private readonly string userRoles = "'Admin','Leave Admin','Employee', 'Company Head', 'Manager'";
         public EmployeePersonalDetailsController
         (
             ICommonService commonService,

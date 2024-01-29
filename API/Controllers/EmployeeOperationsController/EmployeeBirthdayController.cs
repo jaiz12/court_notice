@@ -52,7 +52,7 @@ namespace API.Controllers.EmployeeOperationsController
         [HttpGet("GetBirthday/{userId}/{companyName}")]
         public async Task<IActionResult> GetBirthday(string userId, string companyName)
         {
-            var userCompanyRoleValidate = await _authoriseRoles.AuthorizeUserRole(userId, companyName, "'Admin','Super Admin', 'Company Head', 'Employee', 'Manager'", _roleManager, _userManager);
+            var userCompanyRoleValidate = await _authoriseRoles.AuthorizeUserRole(userId, companyName, "'Admin','Super Admin','Leave Admin','Company Head', 'Employee', 'Manager'", _roleManager, _userManager);
             if (!userCompanyRoleValidate)
             {
                 return BadRequest(new { message = "Unauthorize User.", messageDescription = "You are not authorize to use the module. Please contact with your admin for the permission" });
@@ -68,7 +68,7 @@ namespace API.Controllers.EmployeeOperationsController
         [HttpGet("GetBirthdayComment/{employee_id}/{userId}/{companyName}")]
         public async Task<IActionResult> GetBirthdayComment(string userId, string companyName, string employee_id)
         {
-            var userCompanyRoleValidate = await _authoriseRoles.AuthorizeUserRole(userId, companyName, "'Admin','Super Admin', 'Company Head', 'Employee', 'Manager'", _roleManager, _userManager);
+            var userCompanyRoleValidate = await _authoriseRoles.AuthorizeUserRole(userId, companyName, "'Admin','Super Admin', 'Leave Admin','Company Head', 'Employee', 'Manager'", _roleManager, _userManager);
             if (!userCompanyRoleValidate)
             {
                 return BadRequest(new { message = "Unauthorize User.", messageDescription = "You are not authorize to use the module. Please contact with your admin for the permission" });
@@ -84,7 +84,7 @@ namespace API.Controllers.EmployeeOperationsController
         [HttpPost("PostBirthdayComment/{userId}/{companyName}")]
         public async Task<IActionResult> Post(EmployeeBirthday_DTO data, string userId, string companyName)
         {
-            var userCompanyRoleValidate = await _authoriseRoles.AuthorizeUserRole(userId, companyName, "'Admin','Super Admin', 'Company Head', 'Employee', 'Manager'" ,_roleManager, _userManager);
+            var userCompanyRoleValidate = await _authoriseRoles.AuthorizeUserRole(userId, companyName, "'Admin','Super Admin', 'Leave Admin','Company Head', 'Employee', 'Manager'" ,_roleManager, _userManager);
             if (!userCompanyRoleValidate)
             {
                 return BadRequest(new { message = "Unauthorize User.", messageDescription = "You are not authorize to use the module. Please contact with your admin for the permission" });
@@ -100,7 +100,7 @@ namespace API.Controllers.EmployeeOperationsController
         [HttpDelete("DeleteBirthdayComment/{userId}/{companyName}/{id}")]
         public async Task<IActionResult> Delete(long id, string userId, string companyName)
         {
-            var userCompanyRoleValidate = await _authoriseRoles.AuthorizeUserRole(userId, companyName, "'Admin','Super Admin', 'Company Head', 'Employee', 'Manager'", _roleManager, _userManager);
+            var userCompanyRoleValidate = await _authoriseRoles.AuthorizeUserRole(userId, companyName, "'Admin','Super Admin', 'Leave Admin','Company Head', 'Employee', 'Manager'", _roleManager, _userManager);
             if (!userCompanyRoleValidate)
             {
                 return BadRequest(new { message = "Unauthorize User.", messageDescription = "You are not authorize to use the module. Please contact with your admin for the permission" });
@@ -120,7 +120,7 @@ namespace API.Controllers.EmployeeOperationsController
         [HttpGet("GetBirthdayListForRealTimeChat/{userId}/{companyName}")]
         public async Task<IActionResult> GetBirthdayListForRealTimeChat(string userId, string companyName)
         {
-            var userCompanyRoleValidate = await _authoriseRoles.AuthorizeUserRole(userId, companyName, "'Admin','Super Admin', 'Company Head', 'Employee', 'Manager'", _roleManager, _userManager);
+            var userCompanyRoleValidate = await _authoriseRoles.AuthorizeUserRole(userId, companyName, "'Admin','Super Admin', 'Leave Admin','Company Head', 'Employee', 'Manager'", _roleManager, _userManager);
             if (!userCompanyRoleValidate)
             {
                 return BadRequest(new { message = "Unauthorize User.", messageDescription = "You are not authorize to use the module. Please contact with your admin for the permission" });
@@ -139,7 +139,7 @@ namespace API.Controllers.EmployeeOperationsController
         [HttpPost("SendOrUpdateBirthdayWish/{userId}/{companyName}")]
         public async Task<IActionResult> SendBirthdayWish([FromBody] BirthdayWishesDTO birthdayWish, string userId, string companyName)
         {
-            var userCompanyRoleValidate = await _authoriseRoles.AuthorizeUserRole(userId, companyName, "'Admin','Super Admin', 'Company Head', 'Employee', 'Manager'", _roleManager, _userManager);
+            var userCompanyRoleValidate = await _authoriseRoles.AuthorizeUserRole(userId, companyName, "'Admin','Super Admin', 'Leave Admin','Company Head', 'Employee', 'Manager'", _roleManager, _userManager);
             if (!userCompanyRoleValidate)
             {
                 return BadRequest(new { message = "Unauthorize User.", messageDescription = "You are not authorize to use the module. Please contact with your admin for the permission" });
@@ -178,7 +178,7 @@ namespace API.Controllers.EmployeeOperationsController
         [HttpPost("DeleteBirthdayWish/{userId}/{companyName}")]
         public async Task<IActionResult> DeleteBirthdayWish([FromBody] BirthdayWishesDTO birthdayWish, string userId, string companyName)
         {
-            var userCompanyRoleValidate = await _authoriseRoles.AuthorizeUserRole(userId, companyName, "'Admin','Super Admin', 'Company Head', 'Employee', 'Manager'", _roleManager, _userManager);
+            var userCompanyRoleValidate = await _authoriseRoles.AuthorizeUserRole(userId, companyName, "'Admin','Super Admin', 'Leave Admin','Company Head', 'Employee', 'Manager'", _roleManager, _userManager);
             if (!userCompanyRoleValidate)
             {
                 return BadRequest(new { message = "Unauthorize User.", messageDescription = "You are not authorize to use the module. Please contact with your admin for the permission" });
