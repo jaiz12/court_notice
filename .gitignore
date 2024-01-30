@@ -38,3 +38,12 @@
 /API/Properties/PublishProfiles/FolderProfile2.pubxml.user
 /API/API.csproj.user
 /API/appsettings.json
+/API/.config
+/API/obj
+/API/bin
+/ExceptionHandling/bin/Release/netcoreapp3.1/ExceptionHandling.runtimeconfig.dev.json
+/ExceptionHandling/obj/Release/netcoreapp3.1/ExceptionHandling.csproj.AssemblyReference.cache
+/ExceptionHandling/obj/Release/netcoreapp3.1/ExceptionHandling.csproj.CoreCompileInputs.cache
+/BAL/bin/Release/netcoreapp3.1/BAL.deps.json
+/.vs/ProjectEvaluation/employeeprofile.projects.v7.bin
+/API/bin/Debug/netcoreapp3.1/API.exe

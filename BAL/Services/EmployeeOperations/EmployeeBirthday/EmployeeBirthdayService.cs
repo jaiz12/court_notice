@@ -143,5 +143,39 @@ namespace BAL.Services.EmployeeOperations.EmployeeBirthday
                 CloseContext();
             }
         }
+
+        public async Task<List<EmployeeBirthday_DTO>> GetBirthdayCommentByBirthdayPersonIdAndTimestamp(string employee_id, DateTime? timestamp)
+        {
+
+            try
+            {
+
+                BirthdayWishesDTO obj = new BirthdayWishesDTO {
+                    employee_id = employee_id,
+                    birthday_comment_id = null,
+                    comment = null,
+                    created_on = timestamp,
+                    comment_employee_id = null
+                };
+
+                OpenContext();
+                _sqlCommand.Clear_CommandParameter();
+                DataTable birthdayDT = await _sqlCommand.ExecuteStoredProcedureAsync("emp_get_employee_birthday_wishes_by_birthday_person_id_and_timestamp", obj, "prm_");
+                List<EmployeeBirthday_DTO> birthdayList = new List<EmployeeBirthday_DTO>();
+
+
+                birthdayList = DataTableVsListOfType.ConvertDataTableToList<EmployeeBirthday_DTO>(birthdayDT);
+                return birthdayList;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                CloseContext();
+            }
+
+        }
     }
 }

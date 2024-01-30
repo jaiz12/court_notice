@@ -81,6 +81,33 @@ namespace API.Controllers.EmployeeOperationsController
             return Ok(new { result = birthday });
         }
 
+
+        [HttpGet("GetBirthdayCommentByBirthdayPersonIdAndTimestamp/{userId}/{companyName}")]
+        public async Task<IActionResult> GetBirthdayCommentByBirthdayPersonIdAndTimestamp(string employee_id, DateTime? timestamp, string userId, string companyName)
+        { 
+            var userCompanyRoleValidate = await _authoriseRoles.AuthorizeUserRole(userId, companyName, "'Admin','Super Admin', 'Company Head', 'Employee', 'Manager'", _roleManager, _userManager);
+            if (!userCompanyRoleValidate)
+            {
+                return BadRequest(new { message = "Unauthorize User.", messageDescription = "You are not authorize to use the module. Please contact with your admin for the permission" });
+            }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if(timestamp == null)
+            {
+                var birthday = await _IEmployeeBirthdayService.GetBirthdayComment(employee_id);
+                return Ok(new { result = birthday });
+            }
+            else
+            {
+                List<EmployeeBirthday_DTO> birthdayWishes = await _IEmployeeBirthdayService.GetBirthdayCommentByBirthdayPersonIdAndTimestamp(employee_id, timestamp);
+                return Ok(new { result = birthdayWishes });
+            }
+
+        }
+
         [HttpPost("PostBirthdayComment/{userId}/{companyName}")]
         public async Task<IActionResult> Post(EmployeeBirthday_DTO data, string userId, string companyName)
         {
@@ -151,19 +178,20 @@ namespace API.Controllers.EmployeeOperationsController
 
             try
             {
+                DataResponse res = null;
                 if (birthdayWish.birthday_comment_id > 0)
                 {
-                    await _commonService.PostOrUpdateAsync("emp_update_birthday_comment", birthdayWish, true);
+                     res = await _commonService.PostOrUpdateAsync("emp_update_birthday_comment", birthdayWish, true);
                 }
                 else
                 {
-                    await _commonService.PostOrUpdateAsync("emp_post_birthday_comment", birthdayWish, false);
+                     res = await _commonService.PostOrUpdateAsync("emp_post_birthday_comment", birthdayWish, false);
                 }
 
-                await BroadcastBirthdayWishes(birthdayWish.employee_id);
+                //await BroadcastBirthdayWishes(birthdayWish.employee_id);
 
 
-                return Ok(); // Successful response
+                return Ok(res);
             }
             catch (Exception ex)
             {
@@ -191,9 +219,37 @@ namespace API.Controllers.EmployeeOperationsController
             try
             {
                 DataResponse res = await Task.Run(() => _commonService.DeleteById("emp_delete_birthday_comment", "prm_birthday_comment_id", birthdayWish.birthday_comment_id));
-                var connectionId = HttpContext.Connection.Id;
-                await BroadcastBirthdayWishes(birthdayWish.employee_id);
+                //var connectionId = HttpContext.Connection.Id;
+                //await BroadcastBirthdayWishes(birthdayWish.employee_id);
                 return Ok(res);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal Server Error:" + ex.Message); // Handle the error gracefully
+            }
+        }
+
+
+        /// <summary>
+        /// Get Real Time Chat - 24 JAN 2024
+        /// </summary>
+        [HttpGet("GetWishesListByBirthdayPersonEmployeeId/{employee_id}/{userId}/{companyName}")]
+        public async Task<IActionResult> GetWishesListByBirthdayPersonEmployeeId(string employee_id, string userId, string companyName)
+        {
+            var userCompanyRoleValidate = await _authoriseRoles.AuthorizeUserRole(userId, companyName, "'Admin','Super Admin', 'Company Head', 'Employee', 'Manager'", _roleManager, _userManager);
+            if (!userCompanyRoleValidate)
+            {
+                return BadRequest(new { message = "Unauthorize User.", messageDescription = "You are not authorize to use the module. Please contact with your admin for the permission" });
+            }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                List<EmployeeBirthday_DTO> birthdayWishes = await _commonService.GetListByIdAsync<EmployeeBirthday_DTO>("emp_get_birthday_comment", "prm_employee_id", employee_id);
+                return Ok(birthdayWishes);
             }
             catch (Exception ex)
             {

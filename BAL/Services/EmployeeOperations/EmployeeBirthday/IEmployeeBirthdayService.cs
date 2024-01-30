@@ -16,5 +16,6 @@ namespace BAL.Services.EmployeeOperations.EmployeeBirthday
         Task<DataResponse> Post(EmployeeBirthday_DTO data);
         Task<DataResponse> Delete(long data);
         Task<List<BirthdayListForRealTimeDTO>> GetBirthdayListForRealTimeChat();
+        Task<List<EmployeeBirthday_DTO>> GetBirthdayCommentByBirthdayPersonIdAndTimestamp(string employee_id, DateTime? timestamp);
     }
 }
