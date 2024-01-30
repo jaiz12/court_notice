@@ -37,7 +37,7 @@
 /API/Properties/PublishProfiles/FolderProfile2.pubxml
 /API/Properties/PublishProfiles/FolderProfile2.pubxml.user
 /API/API.csproj.user
-/API/appsettings.json
+
 /DTO/obj/Release/netcoreapp3.1/DTO.csproj.AssemblyReference.cache
 /BAL/bin/Release/netcoreapp3.1/BAL.deps.json
 /API/appsettings.json
