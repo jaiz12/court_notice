@@ -41,9 +41,93 @@
 /API/.config
 /API/obj
 /API/bin
-/ExceptionHandling/bin/Release/netcoreapp3.1/ExceptionHandling.runtimeconfig.dev.json
-/ExceptionHandling/obj/Release/netcoreapp3.1/ExceptionHandling.csproj.AssemblyReference.cache
-/ExceptionHandling/obj/Release/netcoreapp3.1/ExceptionHandling.csproj.CoreCompileInputs.cache
-/BAL/bin/Release/netcoreapp3.1/BAL.deps.json
-/.vs/ProjectEvaluation/employeeprofile.projects.v7.bin
-/API/bin/Debug/netcoreapp3.1/API.exe
+/ExceptionHandling/bin/*
+/ExceptionHandling/obj/*
+/BAL/bin/*
+/.vs/*
+/API/bin/*
+
+
+
+# Ignore compiled files and directories
+/bin/
+/obj/
+
+# Ignore generated files
+**/obj/Release/netcoreapp3.1/
+**/obj/Debug/netcoreapp3.1/
+**/bin/Release/netcoreapp3.1/
+**/bin/Debug/netcoreapp3.1/
+
+# Ignore Visual Studio files
+.vscode/
+.vs/
+
+# Ignore user-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Ignore NuGet packages
+*.nuget.props
+*.paket.*
+*.dll.config
+
+# Ignore project-specific files
+*.pidb
+*.ide
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.pdb
+
+# Ignore miscellaneous files
+Thumbs.db
+Desktop.ini
+
+# Ignore ASP.NET artifacts
+[Tt]humbs.db
+[Ii]pch/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*_i.c
+*_p.c
+*.ilk
+*.meta
+*.obj
+*.pch
+*.pdb
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.tlb
+*.tli
+*.tlh
+*.tmp
+*.tmp_proj
+*.log
+*.vspscc
+*.vssscc
+.builds
+[Bb]in
+[Dd]ebug/
+[Rr]elease/
+_ReSharper/
+[Tt]est[Rr]esult*
+[Nn]ode[Rr]eport*
+[Ll]og/
+[Ll]ogs/
+
+# Ignore app specific folders
+node_modules/
+bower_components/
+
+# Ignore Visual Studio Code specific files
+.vscode/
+
+*.webp
