@@ -10,6 +10,8 @@ using System.Xml.Linq;
 using System.Collections.Generic;
 using DTO.Models.Common;
 using DTO.Models.EmployeeOperation;
+using Newtonsoft.Json.Linq;
+using System.Data.SqlTypes;
 
 namespace BAL.Services.Common
 {
@@ -367,7 +369,28 @@ namespace BAL.Services.Common
                     {
                         if(property.GetValue(item) != null)
                         {
-                            _sqlCommand.Add_Parameter_WithValue(property.Name, property.GetValue(item));
+                            if (property.PropertyType == typeof(DateTime))
+                            {
+                                DateTime dateTimeValue = (DateTime)property.GetValue(item);
+
+                                if (dateTimeValue < SqlDateTime.MinValue.Value)
+                                {
+                                    _sqlCommand.Add_Parameter_WithValue(property.Name, DBNull.Value);
+                                }
+                                else if (dateTimeValue > SqlDateTime.MaxValue.Value)
+                                {
+                                    _sqlCommand.Add_Parameter_WithValue(property.Name, SqlDateTime.MaxValue.Value);
+                                }
+                                else
+                                {
+                                    _sqlCommand.Add_Parameter_WithValue(property.Name, dateTimeValue);
+                                }
+                            }
+                            else
+                            {
+                                // Handle other types or use a generic approach
+                                _sqlCommand.Add_Parameter_WithValue(property.Name, property.GetValue(item));
+                            }
                         }
                     }
                 } 

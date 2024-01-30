@@ -10,6 +10,7 @@ using System;
 using System.Threading.Tasks;
 using System.Data;
 using System.Collections.Generic;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -136,8 +137,46 @@ namespace API.Controllers.EmployeeControllers
 
             return Ok(await _commonService.PostOrUpdateAsync("emp_update_employee_profile_photo", data, false));
         }
-        
-        
+
+
+
+        [HttpPut]
+        [Route("RemoveProfilePhoto/{userId}/{companyName}")]
+        public async Task<IActionResult> RemoveProfilePhoto([FromForm] EmployeePersonalDetailsDTO data, string userId, string companyName)
+        {
+            var userCompanyRoleValidate = await _authoriseRoles.AuthorizeUserRole(userId, companyName, userRoles, _roleManager, _userManager);
+            if (!userCompanyRoleValidate)
+            {
+                return BadRequest(new { message = "Unauthorized User.", messageDescription = "You are not authorized to use the module. Please contact your admin for permission." });
+            }
+
+            // Retrieve the current profile photo path from the database
+            var currentPhotoPath = data.pass_photo_url;
+
+            if (currentPhotoPath != null)
+            {
+                // Delete the file from the directory
+                if (System.IO.File.Exists(currentPhotoPath))
+                {
+                    System.IO.File.Delete(currentPhotoPath);
+                }
+
+                // Update the database to remove the profile photo URL
+               await _commonService.PostOrUpdateAsync("emp_employee_remove_profile_photo", data, false);
+
+               DataResponse res = new DataResponse("Profile Photo Removed Successfully", true);
+               return Ok(res);
+
+            }
+            else
+            {
+                DataResponse res = new DataResponse("Profile Photo Not Found", true);
+                return Ok(res);
+            }
+        }
+
+
+
         [HttpGet]
         [Route("GetEmployeeProfilePhoto/{userId}/{companyName}")]
         public async Task<IActionResult> GetProfilePhotoByEmployeeId(string employee_id, string userId, string companyName)
