@@ -56,6 +56,7 @@ namespace API
 
             //Dependencies resolver
             services.DIBALResolver();
+            services.AddSignalR();
             services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
 
             services.ExceptionDIResolver();
@@ -104,8 +105,6 @@ namespace API
             });
             services.AddSingleton<Services.IEmailSender, EmailSender>();
             services.AddScoped<IAuthoriseRoles, AuthoriseRoles>();
-
-            services.AddSignalR();
 
 
             services.SwaggerConfiguration();

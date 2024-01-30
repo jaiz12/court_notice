@@ -86,7 +86,6 @@ namespace BAL.DependencyResolver
             var context = new CustomAssemblyLoadContext();
             context.LoadUnmanagedLibrary(Path.Combine(Directory.GetCurrentDirectory(), "libwkhtmltox.dll"));
             services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
-            services.AddTransient<BirthdayWishService>();
 
 
             /* Added By : Mukesh Shah */

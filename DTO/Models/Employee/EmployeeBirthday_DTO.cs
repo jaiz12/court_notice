@@ -33,5 +33,10 @@ namespace DTO.Models.Employee
         public string commenter_last_name { get; set; }
         public string commenter_pass_photo_url { get; set; }
         public long birthday_comment_id { get; set; }
+
+
+        //Added by Pranai Giri : For compatibility with API based chat system
+        public DateTime? updated_on { get; set; }
+        public bool isArchived { get; set; }
     }
 }
