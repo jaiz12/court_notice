@@ -150,29 +150,17 @@ namespace API.Controllers.EmployeeControllers
                 return BadRequest(new { message = "Unauthorized User.", messageDescription = "You are not authorized to use the module. Please contact your admin for permission." });
             }
 
-            // Retrieve the current profile photo path from the database
-            var currentPhotoPath = data.pass_photo_url;
-
-            if (currentPhotoPath != null)
+            await _commonService.DeleteFileFromDirectoryUsingFilePath(data.pass_photo_url);
+            DataResponse res = await _commonService.PostOrUpdateAsync("emp_employee_remove_profile_photo", data, false);
+            if (res.IsSucceeded)
             {
-                // Delete the file from the directory
-                if (System.IO.File.Exists(currentPhotoPath))
-                {
-                    System.IO.File.Delete(currentPhotoPath);
-                }
-
-                // Update the database to remove the profile photo URL
-               await _commonService.PostOrUpdateAsync("emp_employee_remove_profile_photo", data, false);
-
-               DataResponse res = new DataResponse("Profile Photo Removed Successfully", true);
-               return Ok(res);
-
+                return Ok(new DataResponse("Profile Picture Removed Successfully", true));
             }
             else
             {
-                DataResponse res = new DataResponse("Profile Photo Not Found", true);
-                return Ok(res);
+                return NotFound(new DataResponse("File Not Found", false));
             }
+
         }
 
 

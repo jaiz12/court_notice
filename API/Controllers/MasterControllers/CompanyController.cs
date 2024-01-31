@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.IO;
 using System;
 using System.Threading.Tasks;
+using DTO.Models;
 
 namespace API.Controllers.MasterController
 {
@@ -197,6 +198,32 @@ namespace API.Controllers.MasterController
             {
                 return BadRequest();
             }
+        }
+
+
+
+        [HttpPut]
+        [Route("RemoveCompanyLogo/{userId}/{companyName}")]
+        public async Task<IActionResult> RemoveProfilePhoto([FromForm] CompanyLogoDTO data, string userId, string companyName)
+        {
+            var userCompanyRoleValidate = await _authoriseRoles.AuthorizeUserRole(userId, companyName, "'Admin','Super Admin'", _roleManager, _userManager);
+            if (!userCompanyRoleValidate)
+            {
+                return BadRequest(new { message = "Unauthorized User.", messageDescription = "You are not authorized to use the module. Please contact your admin for permission." });
+            }
+
+
+            await _commonService.DeleteFileFromDirectoryUsingFilePath(data.company_logo_url);
+            DataResponse res = await _commonService.PostOrUpdateAsync("emp_company_remove_logo", data, true);
+            if (res.IsSucceeded)
+            {
+                return Ok(new DataResponse("Company Logo Removed Successfully", true));
+            }
+            else
+            {
+                return NotFound(new DataResponse("File Not Found", false));
+            }
+
         }
 
 

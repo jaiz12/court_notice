@@ -24,5 +24,7 @@ namespace BAL.Services.Common
         public Task<DataResponse> PostOrUpdateAsync(string spName, dynamic item, bool isUpdate);
         public DataResponse DeleteById(string spName, string prmInitial, dynamic id);
 
+        public Task<bool> DeleteFileFromDirectoryUsingFilePath(string filePath);
+
     }
 }

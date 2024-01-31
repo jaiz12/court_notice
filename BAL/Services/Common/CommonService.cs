@@ -484,5 +484,30 @@ namespace BAL.Services.Common
             }
 
         }
+
+        public async Task<bool> DeleteFileFromDirectoryUsingFilePath(string filePath)
+        {
+            if (filePath != null)
+            {
+                // Use Task.Run for asynchronous file deletion
+                await Task.Run(() =>
+                {
+                    // Delete the file from the directory if it exists
+                    if (System.IO.File.Exists(filePath))
+                    {
+                        System.IO.File.Delete(filePath);
+                        return true;  // File deleted successfully
+                    }
+                    else
+                    {
+                        return false;  // File does not exist
+                    }
+                });
+            }
+
+            return false;  // Invalid file path
+        }
+
+
     }
 }
