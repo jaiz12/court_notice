@@ -86,6 +86,7 @@ namespace API.Controllers.ContentMessageManagementSystemController
             try
             {
                 var result = await _contentMessageManagementSystemService.DeleteCmsMessage(message_id);
+                await _notificationAlertHubContext.Clients.All.SendAsync("NewMessageAlert");
                 return Ok(new { result = result });
             }
             catch
