@@ -11,7 +11,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BAL.Services.EmployeeOperations.EmployeePrintCV
@@ -36,7 +35,7 @@ namespace BAL.Services.EmployeeOperations.EmployeePrintCV
 
         ICommonService _commonService;
 
-        public EmployeePrintCVService(ICommonService commonService, IConverter converter) 
+        public EmployeePrintCVService(ICommonService commonService, IConverter converter)
         {
             _commonService = commonService;
             _converter = converter;
@@ -45,7 +44,7 @@ namespace BAL.Services.EmployeeOperations.EmployeePrintCV
         public async Task<dynamic> GetEmployeeListForPrintCV(PaginationEntityDTO pagination = null)
         {
             DataSet ds = await _commonService.GetDataSetByIdAsync("emp_get_employee_list_for_print_cv", null, null, pagination);
-            
+
             int TotalRows = (int)ds.Tables[0].Rows[0]["TotalRows"];
             List<EmployeeDetailsForPrintCVDTO> EmployeeList = DataTableVsListOfType.ConvertDataTableToList<EmployeeDetailsForPrintCVDTO>(ds.Tables[1]);
 
@@ -66,8 +65,8 @@ namespace BAL.Services.EmployeeOperations.EmployeePrintCV
             {
 
                 //get personal information
-                EmployeeCVPersonalInformationDTO personalInformation = (EmployeeCVPersonalInformationDTO) await _commonService.GetByIdAsync<EmployeeCVPersonalInformationDTO>("emp_get_resume_personal_information_by_employeeid", "employee_id", employee.employee_id);
-                
+                EmployeeCVPersonalInformationDTO personalInformation = (EmployeeCVPersonalInformationDTO)await _commonService.GetByIdAsync<EmployeeCVPersonalInformationDTO>("emp_get_resume_personal_information_by_employeeid", "employee_id", employee.employee_id);
+
                 //get qualification list
                 List<EmployeeCVQualificationDTO> qualificationInformation = await _commonService.GetListByIdAsync<EmployeeCVQualificationDTO>("emp_get_resume_qualification_list_by_employeeid", "employee_id", employee.employee_id);
 
@@ -79,7 +78,7 @@ namespace BAL.Services.EmployeeOperations.EmployeePrintCV
                     PagesCount = true,
                     //generating HTML content from here
                     HtmlContent = TemplateGenerator.GetHTMLString(personalInformation, qualificationInformation),
-                    WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet = Path.Combine(Directory.GetCurrentDirectory(), "assets","printcv", "css", "defaultFormat.css") },
+                    WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet = Path.Combine(Directory.GetCurrentDirectory(), "assets", "printcv", "css", "defaultFormat.css") },
                     //HeaderSettings = { FontName = "Arial", FontSize = 9, Right = "Page [page] of [toPage]", Line = true },
                     //FooterSettings = { FontName = "Arial", FontSize = 9, Line = true, Center = "Report Footer" },
                 };

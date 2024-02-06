@@ -2,11 +2,8 @@
 using DTO.Models.Auth;
 using Microsoft.Extensions.Options;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Mail;
-using System.Reflection;
 using System.Threading.Tasks;
 
 namespace API.Services
@@ -39,16 +36,16 @@ namespace API.Services
                 var SenderName = "";
                 var SenderEmail = "";
                 var SenderPassword = "";
-                foreach(var sender in _emailSettings.senderDetails)
+                foreach (var sender in _emailSettings.senderDetails)
                 {
-                    if(sender.SenderName == company)
+                    if (sender.SenderName == company)
                     {
                         SenderName = sender.SenderName;
                         SenderEmail = sender.Sender;
                         SenderPassword = sender.Password;
                     }
                 }
-                
+
                 // Credentials
                 var credentials = new NetworkCredential(SenderEmail, SenderPassword);
 

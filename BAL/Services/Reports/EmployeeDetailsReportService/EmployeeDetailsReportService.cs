@@ -1,12 +1,8 @@
 ﻿using Common.DbContext;
 using DTO.Models.Reports;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics;
-using System.Text;
 using System.Threading.Tasks;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace BAL.Services.Reports.EmployeeDetailsReportService
 {
@@ -18,8 +14,8 @@ namespace BAL.Services.Reports.EmployeeDetailsReportService
             {
                 OpenContext();
                 _sqlCommand.Clear_CommandParameter();
-                var query = $"Select t1.employee_id as Emp_Code , t1.first_name as First_Name, t1.middle_name as Middle_Name, t1.last_name as Last_Name, t1.date_of_birth as Date_Of_Birth, t3.gender_name as Gender,t4.company_name as Company, t5.branch_name as Branch, t6.designation_name as Designation, t7.division_name as Division,  t8.appointment_status_name as Service_Status, t2.date_of_joining as Date_Of_Joining, t9.place_of_posting_name as Place_Of_Posting, t10.pf_uan_no as UAN_No, t10.pf_bank_account_no as Bank_Account_No   from emp_employee_personal_details as t1  join emp_employee_service_details as t2 on t1.employee_id = t2.employee_id   join emp_gender_master as t3 on t1.gender_id = t3.gender_id  join emp_company_master as t4 on t2.company_id = t4.company_id  join emp_branch_master as t5 on t2.branchoffice_id = t5.branch_id  join emp_designation_master as t6 on t2.designation_id = t6.designation_id  join emp_division_master as t7 on t2.division_id = t7.division_id  join emp_appointment_status_master as t8 on t2.appointment_status_id = t8.appointment_status_id  join emp_place_of_posting_master as t9 on t2.place_of_posting_id = t9.place_of_posting_id left join emp_employee_other_details as t10 on t1.employee_id = t10.employee_id join (select employee_id , MAX(updated_on) as updated_on from emp_employee_service_details group by employee_id) t11 on t2.employee_id = t11.employee_id and t11.updated_on = t2.updated_on where t1.employee_id = t2.employee_id";                
-                
+                var query = $"Select t1.employee_id as Emp_Code , t1.first_name as First_Name, t1.middle_name as Middle_Name, t1.last_name as Last_Name, t1.date_of_birth as Date_Of_Birth, t3.gender_name as Gender,t4.company_name as Company, t5.branch_name as Branch, t6.designation_name as Designation, t7.division_name as Division,  t8.appointment_status_name as Service_Status, t2.date_of_joining as Date_Of_Joining, t9.place_of_posting_name as Place_Of_Posting, t10.pf_uan_no as UAN_No, t10.pf_bank_account_no as Bank_Account_No   from emp_employee_personal_details as t1  join emp_employee_service_details as t2 on t1.employee_id = t2.employee_id   join emp_gender_master as t3 on t1.gender_id = t3.gender_id  join emp_company_master as t4 on t2.company_id = t4.company_id  join emp_branch_master as t5 on t2.branchoffice_id = t5.branch_id  join emp_designation_master as t6 on t2.designation_id = t6.designation_id  join emp_division_master as t7 on t2.division_id = t7.division_id  join emp_appointment_status_master as t8 on t2.appointment_status_id = t8.appointment_status_id  join emp_place_of_posting_master as t9 on t2.place_of_posting_id = t9.place_of_posting_id left join emp_employee_other_details as t10 on t1.employee_id = t10.employee_id join (select employee_id , MAX(updated_on) as updated_on from emp_employee_service_details group by employee_id) t11 on t2.employee_id = t11.employee_id and t11.updated_on = t2.updated_on where t1.employee_id = t2.employee_id";
+
                 if (data.company_id != 0)
                 {
                     query += $" and t2.company_id = {data.company_id}";
@@ -44,7 +40,7 @@ namespace BAL.Services.Reports.EmployeeDetailsReportService
                 {
                     query += $" and t2.place_of_posting_id = {data.place_of_posting_id}";
                 }
-                if(data.appointment_status_id  != 0)
+                if (data.appointment_status_id != 0)
                 {
                     query += $" and t2.appointment_status_id = {data.appointment_status_id}";
                 }
@@ -71,7 +67,7 @@ namespace BAL.Services.Reports.EmployeeDetailsReportService
             {
                 OpenContext();
                 _sqlCommand.Clear_CommandParameter();
-                var query = $"Select t1.employee_id as Emp_Code,t1.first_name as first_Name,t1.middle_name as middile_Name,t1.last_name as last_Name,t2.effective_to as service_end_date,t4.company_name as company,t5.branch_name as branch,t6.designation_name as designation,t7.division_name as division,t8.appointment_status_name as appointment_status, t2.date_of_joining, t9.place_of_posting_name as place_of_posting from emp_employee_personal_details as t1 join emp_employee_service_details as t2 on t1.employee_id = t2.employee_id join emp_gender_master as t3 on t1.gender_id = t3.gender_id join emp_company_master as t4 on t2.company_id = t4.company_id join emp_branch_master as t5 on t2.branchoffice_id = t5.branch_id join emp_designation_master as t6 on t2.designation_id = t6.designation_id join emp_division_master as t7 on t2.division_id = t7.division_id join emp_appointment_status_master as t8 on t2.appointment_status_id = t8.appointment_status_id join emp_place_of_posting_master as t9 on t2.place_of_posting_id = t9.place_of_posting_id join (select employee_id , MAX(updated_on) as updated_on from emp_employee_service_details group by employee_id) t10 on t2.employee_id = t10.employee_id and t10.updated_on = t2.updated_on where t1.employee_id is not null";                
+                var query = $"Select t1.employee_id as Emp_Code,t1.first_name as first_Name,t1.middle_name as middile_Name,t1.last_name as last_Name,t2.effective_to as service_end_date,t4.company_name as company,t5.branch_name as branch,t6.designation_name as designation,t7.division_name as division,t8.appointment_status_name as appointment_status, t2.date_of_joining, t9.place_of_posting_name as place_of_posting from emp_employee_personal_details as t1 join emp_employee_service_details as t2 on t1.employee_id = t2.employee_id join emp_gender_master as t3 on t1.gender_id = t3.gender_id join emp_company_master as t4 on t2.company_id = t4.company_id join emp_branch_master as t5 on t2.branchoffice_id = t5.branch_id join emp_designation_master as t6 on t2.designation_id = t6.designation_id join emp_division_master as t7 on t2.division_id = t7.division_id join emp_appointment_status_master as t8 on t2.appointment_status_id = t8.appointment_status_id join emp_place_of_posting_master as t9 on t2.place_of_posting_id = t9.place_of_posting_id join (select employee_id , MAX(updated_on) as updated_on from emp_employee_service_details group by employee_id) t10 on t2.employee_id = t10.employee_id and t10.updated_on = t2.updated_on where t1.employee_id is not null";
                 if (data.company_id != 0)
                 {
                     query += $" and t2.company_id = {data.company_id}";
@@ -96,7 +92,7 @@ namespace BAL.Services.Reports.EmployeeDetailsReportService
                 {
                     query += $" and t2.place_of_posting_id = {data.place_of_posting_id}";
                 }
-                if(data.appointment_status_id  != 0)
+                if (data.appointment_status_id != 0)
                 {
                     query += $" and t2.appointment_status_id = {data.appointment_status_id}";
                 }
@@ -126,9 +122,9 @@ namespace BAL.Services.Reports.EmployeeDetailsReportService
                 var query =
                 $"SELECT t1.employee_id, t1.leave_type_id, t12.leave_type_name, t1.financial_year_id, t1.total_leave, ISNULL(t2_subquery.total_leave_applied, 0) as total_leave_applied, " +
                 $"t3.first_name, t3.middle_name, t3.last_name, t5.company_name, t6.branch_name, t7.place_of_posting_name, t8.division_name, t9.designation_name, t10.appointment_status_name, " +
-                $"t2_subquery.attachment_url, t2_subquery.from_date, t2_subquery.to_date, t2_subquery.is_approve " + 
+                $"t2_subquery.attachment_url, t2_subquery.from_date, t2_subquery.to_date, t2_subquery.is_approve " +
                 $"FROM lv_employee_wise_leave_config as t1 " +
-                $"JOIN (SELECT employee_id, leave_type_id, SUM(total_leave_applied) as total_leave_applied, MAX(attachment_url) as attachment_url, MAX(from_date) as from_date, MAX(to_date) as to_date, MAX(is_approve) as is_approve " +  
+                $"JOIN (SELECT employee_id, leave_type_id, SUM(total_leave_applied) as total_leave_applied, MAX(attachment_url) as attachment_url, MAX(from_date) as from_date, MAX(to_date) as to_date, MAX(is_approve) as is_approve " +
                 $"FROM lv_apply_leave ";
                 if (data.month != 0)
                 {
@@ -151,36 +147,36 @@ namespace BAL.Services.Reports.EmployeeDetailsReportService
                 {
                     query += $" and t4.company_id = {data.company_id} ";
                 }
-                if(data.branch_id != 0)
+                if (data.branch_id != 0)
                 {
                     query += $" and t4.branchoffice_id = {data.branch_id} ";
                 }
-                if(data.place_of_posting_id != 0)
+                if (data.place_of_posting_id != 0)
                 {
                     query += $" and t4.place_of_posting_id = {data.place_of_posting_id} ";
                 }
-                if(data.division_id != 0)
+                if (data.division_id != 0)
                 {
                     query += $" and t4.division_id = {data.division_id} ";
                 }
-                if(data.designation_id != 0)
+                if (data.designation_id != 0)
                 {
                     query += $" and t4.designation_id = {data.designation_id} ";
                 }
-                if(data.appointment_status_id != 0)
+                if (data.appointment_status_id != 0)
                 {
                     query += $" and t4.appointment_status_id = {data.appointment_status_id} ";
                 }
-                if(data.leave_type_id != 0)
+                if (data.leave_type_id != 0)
                 {
                     query += $" and t1.leave_type_id = {data.leave_type_id} ";
                 }
-                
+
                 query += " order by t12.leave_type_name desc;";
                 var result = await Task.Run(() => _sqlCommand.Select_Table(query, CommandType.Text));
                 return result;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception($"{ex.Message}");
             }
@@ -204,7 +200,7 @@ namespace BAL.Services.Reports.EmployeeDetailsReportService
                 DataTable getUserRoleManagerDivisionIdDT = await Task.Run(() => _sqlCommand.Select_Table(query, CommandType.Text));
                 return getUserRoleManagerDivisionIdDT;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }

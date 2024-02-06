@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
-using Microsoft.VisualStudio.Web.CodeGeneration.Contracts.Messaging;
 using System.Threading.Tasks;
 
 namespace API.Controllers.ContentMessageManagementSystemController
@@ -28,7 +27,7 @@ namespace API.Controllers.ContentMessageManagementSystemController
         private readonly IAuthoriseRoles _authoriseRoles;
         private readonly IHubContext<NotificationAlert> _notificationAlertHubContext;
 
-        public ContentMessageManagementSystemController(IContentMessageManagementSystemService contentMessageManagementSystemService, 
+        public ContentMessageManagementSystemController(IContentMessageManagementSystemService contentMessageManagementSystemService,
             UserManager<ApplicationUser> userManager,
             RoleManager<IdentityRole> roleManager,
             IAuthoriseRoles authoriseRoles,

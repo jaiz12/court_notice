@@ -2,7 +2,6 @@
 using BAL.Auth.AuthService;
 using BAL.Services.Common;
 using Common.DataContext;
-using Common.DbContext;
 using DTO.Models.Auth;
 using DTO.Models.Employee;
 using Microsoft.AspNetCore.Authorization;
@@ -14,13 +13,11 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using System.Transactions;
 
 
 // =============================================
@@ -554,7 +551,7 @@ namespace UserManagementAPI.Controllers
 
             }
             Data.UpdatedOn = DateTime.Now;
-           
+
             if (Data.newPassword == Data.confirmPassword)
             {
                 var userList = await _userManager.FindByNameAsync(Data.userName);
@@ -577,7 +574,7 @@ namespace UserManagementAPI.Controllers
                 {
                     return Ok(new { message = "Old Password Doesn't Match", messageDescription = "", messageType = "error" });
                 }
-              
+
             }
             else
             {

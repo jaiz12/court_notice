@@ -1,12 +1,9 @@
 ﻿using Common.DbContext;
-using DTO.Models.ContentManagementSystem;
 using DTO.Models;
+using DTO.Models.ContentManagementSystem;
 using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using System.Data;
-using Common.Utilities;
-using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace BAL.Services.ContentManagementSystem.ContentManagementSystem
 {
@@ -109,7 +106,7 @@ namespace BAL.Services.ContentManagementSystem.ContentManagementSystem
             try
             {
                 OpenContext();
-                DataTable result = _sqlCommand.Select_Table("cms_get_content_management_system_details", CommandType.StoredProcedure);
+                DataTable result = await Task.Run(() => _sqlCommand.Select_Table("cms_get_content_management_system_details", CommandType.StoredProcedure));
                 return result;
             }
             catch (Exception ex)
@@ -126,7 +123,7 @@ namespace BAL.Services.ContentManagementSystem.ContentManagementSystem
             try
             {
                 OpenContext();
-                DataTable cmsDetailsDT = _sqlCommand.Select_Table("cms_getonload_content_management_system_details", CommandType.StoredProcedure);
+                DataTable cmsDetailsDT  = await Task.Run(() => _sqlCommand.Select_Table("cms_getonload_content_management_system_details", CommandType.StoredProcedure));
                 return cmsDetailsDT;
             }
             catch (Exception ex)
@@ -149,7 +146,7 @@ namespace BAL.Services.ContentManagementSystem.ContentManagementSystem
                 DataTable messageCount = await Task.Run(() => _sqlCommand.Select_Table("cms_get_notice_count", CommandType.StoredProcedure));
                 return messageCount;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }

@@ -6,7 +6,7 @@ namespace DTO.Models.Auth
     {
         public string MailServer { get; set; }
         public int MailPort { get; set; }
-        
+
         public List<SenderDetails> senderDetails { get; set; }
     }
     public class SenderDetails

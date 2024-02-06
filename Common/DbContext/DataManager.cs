@@ -262,7 +262,7 @@ namespace Common.DbContext
         {
             try
             {
-            
+
                 _sqlCommand.Transaction = MyTransaction;
             }
             catch (System.Data.SqlClient.SqlException Sqex)

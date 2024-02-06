@@ -1,8 +1,6 @@
 ﻿using DTO.Models.Common;
 using DTO.Models.EmployeeOperation.PrintCV;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BAL.Services.EmployeeOperations.EmployeePrintCV

@@ -59,7 +59,7 @@ namespace DTO.Models.Auth
         public List<AspNetUserRoles_Register_DTO> Roles { get; set; }
         public bool UserStatus { get; set; }
 
-        public string? exit_type_id {  get; set; }
+        public string? exit_type_id { get; set; }
         public long? employee_personal_id { get; set; }
         public long? employee_service_id { get; set; }
         public string CreatedBy { get; set; }

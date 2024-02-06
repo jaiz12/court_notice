@@ -1,15 +1,13 @@
 ﻿using Common.DbContext;
-using DTO.Models.ContentManagementSystem;
 using DTO.Models;
+using DTO.Models.ContentManagementSystem;
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data;
+using System.Threading.Tasks;
 
 namespace BAL.Services.ContentManagementSystem.ContentMessageManagementSystem
 {
-    public class ContentMessageManagementSystemService: MyDbContext, IContentMessageManagementSystemService
+    public class ContentMessageManagementSystemService : MyDbContext, IContentMessageManagementSystemService
     {
         public async Task<DataResponse> PostCmsMessage(ContentMessageManagementSystem_DTO message)
         {
@@ -33,7 +31,7 @@ namespace BAL.Services.ContentManagementSystem.ContentMessageManagementSystem
                     return new DataResponse("Message Already Exists", false);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -64,7 +62,7 @@ namespace BAL.Services.ContentManagementSystem.ContentMessageManagementSystem
                     return new DataResponse("Message Already Exists", false);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -92,7 +90,7 @@ namespace BAL.Services.ContentManagementSystem.ContentMessageManagementSystem
                     return new DataResponse("Failed To Delete Message", false);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -111,7 +109,7 @@ namespace BAL.Services.ContentManagementSystem.ContentMessageManagementSystem
                 DataTable messageDT = await Task.Run(() => _sqlCommand.Select_Table("cms_get_content_message_management_system_details", CommandType.StoredProcedure));
                 return messageDT;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -129,10 +127,10 @@ namespace BAL.Services.ContentManagementSystem.ContentMessageManagementSystem
                 _sqlCommand.Clear_CommandParameter();
                 DateTime currentDate = DateTime.Now;
                 _sqlCommand.Add_Parameter_WithValue("prm_currentDate", Convert.ToDateTime(currentDate).ToString("yyyy-MM-dd"));
-                DataTable messageForLoginDT = await Task.Run(()=> _sqlCommand.Select_Table("cms_getforlogin_content_message_management_system_details", CommandType.StoredProcedure));
+                DataTable messageForLoginDT = await Task.Run(() => _sqlCommand.Select_Table("cms_getforlogin_content_message_management_system_details", CommandType.StoredProcedure));
                 return messageForLoginDT;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -153,7 +151,7 @@ namespace BAL.Services.ContentManagementSystem.ContentMessageManagementSystem
                 DataTable messageCount = await Task.Run(() => _sqlCommand.Select_Table("cms_get_message_count", CommandType.StoredProcedure));
                 return messageCount;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }

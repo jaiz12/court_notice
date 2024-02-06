@@ -2,16 +2,13 @@
 using Common.DbContext;
 using Common.Utilities;
 using DTO.Models;
-using System;
-using System.Data;
-using System.Threading.Tasks;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
-using System.Xml.Linq;
-using System.Collections.Generic;
 using DTO.Models.Common;
 using DTO.Models.EmployeeOperation;
-using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlTypes;
+using System.Threading.Tasks;
 
 namespace BAL.Services.Common
 {
@@ -85,7 +82,7 @@ namespace BAL.Services.Common
 
                 DataTable dt = _sqlCommand.Select_Table(spName, CommandType.StoredProcedure);
 
-                if(dt.Rows.Count > 0)
+                if (dt.Rows.Count > 0)
                 {
                     T model = DataTableVsListOfType.ConvertDataTableToModel<T>(dt.Rows[0]);
                     return model;
@@ -363,11 +360,11 @@ namespace BAL.Services.Common
                 OpenContext();
                 _sqlCommand.Clear_CommandParameter();
 
-                if(item is object)
+                if (item is object)
                 {
                     foreach (var property in item.GetType().GetProperties())
                     {
-                        if(property.GetValue(item) != null)
+                        if (property.GetValue(item) != null)
                         {
                             if (property.PropertyType == typeof(DateTime))
                             {
@@ -393,7 +390,7 @@ namespace BAL.Services.Common
                             }
                         }
                     }
-                } 
+                }
 
                 //_sqlCommand.Add_Parameter_WithValues("", item);
 

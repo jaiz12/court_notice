@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 // =============================================
 // -- Author:		Jaideep Roy
 // -- Create date: 09-Nov-2023
@@ -245,12 +244,12 @@ namespace BAL.Auth.AuthService
 
         public async Task<List<LeaveConfiguration_DTO>> GetLeaveConfiguration(long company_id, long branch_id, long appointment_status_id, long financial_year_id)
         {
-                var query = $"Select * from lv_leave_configuration_master where company_id ={company_id} and branch_id = {branch_id} and appointment_status_id = {appointment_status_id} and financial_year_id = {financial_year_id};";
-                DataTable leaveConfigDT = await Task.Run(() => _sqlCommand.Select_Table(query, CommandType.Text));
-                List<LeaveConfiguration_DTO> leaveconfiglist = new List<LeaveConfiguration_DTO>();
-                leaveconfiglist = DataTableVsListOfType.ConvertDataTableToList<LeaveConfiguration_DTO>(leaveConfigDT);
-                return leaveconfiglist;
-            
+            var query = $"Select * from lv_leave_configuration_master where company_id ={company_id} and branch_id = {branch_id} and appointment_status_id = {appointment_status_id} and financial_year_id = {financial_year_id};";
+            DataTable leaveConfigDT = await Task.Run(() => _sqlCommand.Select_Table(query, CommandType.Text));
+            List<LeaveConfiguration_DTO> leaveconfiglist = new List<LeaveConfiguration_DTO>();
+            leaveconfiglist = DataTableVsListOfType.ConvertDataTableToList<LeaveConfiguration_DTO>(leaveConfigDT);
+            return leaveconfiglist;
+
         }
 
 
