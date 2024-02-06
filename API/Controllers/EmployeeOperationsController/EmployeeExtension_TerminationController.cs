@@ -19,7 +19,7 @@ namespace API.Controllers.EmployeeOperationsController
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IAuthoriseRoles _authoriseRoles;
 
-        public EmployeeExtension_TerminationController(IEmployeeExtension_TerminationService employeeExtensionService, 
+        public EmployeeExtension_TerminationController(IEmployeeExtension_TerminationService employeeExtensionService,
             UserManager<ApplicationUser> userManager,
             RoleManager<IdentityRole> roleManager, IAuthoriseRoles authoriseRoles)
         {

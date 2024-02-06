@@ -1,8 +1,6 @@
 ﻿using DTO.Models;
 using DTO.Models.Master;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BAL.Services.Master.PlaceOfPostingService

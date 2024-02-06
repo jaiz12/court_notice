@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DTO.Models.EmployeeOperation.PrintCV
+﻿namespace DTO.Models.EmployeeOperation.PrintCV
 {
     public class EmployeeDetailsForPrintCVDTO
     {

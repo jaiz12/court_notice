@@ -3,7 +3,6 @@ using BAL.Services.EmployeeOperations.EmployeePromotionService;
 using DTO.Models.Auth;
 using DTO.Models.EmployeeOperation;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -30,7 +29,7 @@ namespace API.Controllers.EmployeeOperationsController
         }
         [HttpPost("GetEmployeeBasicServiceForPromotion/{userId}/{companyName}")]
 
-        public async Task<IActionResult> GetEmployeeBasicServiceForPromotion(EmployeePromotionOptionValues_DTO optionValues,string userId, string companyName)
+        public async Task<IActionResult> GetEmployeeBasicServiceForPromotion(EmployeePromotionOptionValues_DTO optionValues, string userId, string companyName)
         {
             var userCompanyRoleValidate = await _authoriseRoles.AuthorizeUserRole(userId, companyName, "'Admin','Super Admin', 'Company Head', 'Manager'", _roleManager, _userManager);
             if (!userCompanyRoleValidate)

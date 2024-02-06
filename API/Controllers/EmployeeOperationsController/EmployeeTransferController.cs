@@ -1,12 +1,10 @@
 ﻿using API.Services;
 using BAL.Services.Common;
-using BAL.Services.EmployeeOperations.EmployeeAwardService;
 using DTO.Models.Auth;
 using DTO.Models.Common;
 using DTO.Models.EmployeeOperation;
 using DTO.Models.EmployeeOperation.Transfer;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -64,7 +62,7 @@ namespace API.Controllers.EmployeeOperationsController
             }
             try
             {
-                var result =  await _commonService.GetListByIdAsync<EmployeeTransferDTO>("emp_get_employee_transfer_operation_details", null, null, pagination);
+                var result = await _commonService.GetListByIdAsync<EmployeeTransferDTO>("emp_get_employee_transfer_operation_details", null, null, pagination);
                 return Ok(result);
             }
             catch
@@ -154,7 +152,7 @@ namespace API.Controllers.EmployeeOperationsController
             }
             try
             {
-               return Ok(await _commonService.PostOrUpdateAsync("emp_post_employee_transfer_operation_details", transferDetails, false)); ;
+                return Ok(await _commonService.PostOrUpdateAsync("emp_post_employee_transfer_operation_details", transferDetails, false)); ;
             }
             catch
             {

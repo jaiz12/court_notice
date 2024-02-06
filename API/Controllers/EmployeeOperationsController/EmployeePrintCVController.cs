@@ -5,7 +5,6 @@ using DTO.Models.Auth;
 using DTO.Models.Common;
 using DTO.Models.EmployeeOperation.PrintCV;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -69,10 +68,10 @@ namespace API.Controllers.EmployeeOperationsController
             }
             try
             {
-                var result =  await _employeePrintCVService.GenerateEmployeeResumePdf(employee);
+                var result = await _employeePrintCVService.GenerateEmployeeResumePdf(employee);
                 return File(result, "application/pdf");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }

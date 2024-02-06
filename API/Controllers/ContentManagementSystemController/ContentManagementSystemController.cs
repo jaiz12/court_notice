@@ -26,9 +26,9 @@ namespace API.Controllers.ContentManagementSystemController
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IAuthoriseRoles _authoriseRoles;
         private readonly IHubContext<NotificationAlert> _notificationAlertHubContext;
-        public ContentManagementSystemController(IContentManagementSystemService contentManagementSystemService, 
+        public ContentManagementSystemController(IContentManagementSystemService contentManagementSystemService,
             UserManager<ApplicationUser> userManager,
-            RoleManager<IdentityRole> roleManager, 
+            RoleManager<IdentityRole> roleManager,
             IAuthoriseRoles authoriseRoles,
             IHubContext<NotificationAlert> notificationAlertHubContext)
         {
@@ -54,7 +54,7 @@ namespace API.Controllers.ContentManagementSystemController
             }
             catch
             {
-                return  BadRequest();
+                return BadRequest();
             }
         }
         [HttpPut("PutCMSDetails/{userId}/{companyName}")]

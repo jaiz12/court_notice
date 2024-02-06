@@ -1,12 +1,8 @@
 ﻿using Common.DbContext;
-using Common.Utilities;
 using DTO.Models;
 using DTO.Models.EmployeeOperation;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BAL.Services.EmployeeOperations.EmployeePromotionService
@@ -230,7 +226,7 @@ namespace BAL.Services.EmployeeOperations.EmployeePromotionService
                 Trans = _connection._Connection.BeginTransaction(IsolationLevel.Serializable);
                 _sqlCommand.Add_Transaction(Trans);
 
-               
+
 
                 string getEmpId = $"Select employee_id from emp_employee_service_details   Where employee_service_id = {employee_service_id}";
                 string employeeId = await Task.Run(() => _sqlCommand.Select_Scalar(getEmpId, CommandType.Text));
@@ -266,10 +262,10 @@ namespace BAL.Services.EmployeeOperations.EmployeePromotionService
                 {
                     return new DataResponse("Can't Delete Singular Record", true);
                 }
-                
-               
 
-                
+
+
+
             }
             catch (Exception ex)
             {

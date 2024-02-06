@@ -5,12 +5,9 @@ using DTO.Models.Auth;
 using DTO.Models.Employee;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.IO;
 using System;
+using System.IO;
 using System.Threading.Tasks;
-using System.Data;
-using System.Collections.Generic;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 

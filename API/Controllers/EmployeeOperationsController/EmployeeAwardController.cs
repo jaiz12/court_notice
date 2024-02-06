@@ -3,11 +3,8 @@ using BAL.Services.EmployeeOperations.EmployeeAwardService;
 using DTO.Models.Auth;
 using DTO.Models.EmployeeOperation;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.IO;
-using System;
 using System.Threading.Tasks;
 
 namespace API.Controllers.EmployeeOperationsController

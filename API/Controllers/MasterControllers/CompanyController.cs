@@ -1,16 +1,14 @@
 ﻿using API.Services;
 using BAL.Services.Common;
 using BAL.Services.Master.CompanyService;
+using DTO.Models;
 using DTO.Models.Auth;
-using DTO.Models.Employee;
 using DTO.Models.Master;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.IO;
-using System;
 using System.Threading.Tasks;
-using DTO.Models;
 
 namespace API.Controllers.MasterController
 {

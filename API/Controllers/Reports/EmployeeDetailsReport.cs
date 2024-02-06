@@ -1,8 +1,6 @@
 ﻿using API.Services;
-using BAL.Services.Common;
 using BAL.Services.Reports.EmployeeDetailsReportService;
 using DTO.Models.Auth;
-using DTO.Models.Employee;
 using DTO.Models.Reports;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -47,7 +45,7 @@ namespace API.Controllers.Reports
             {
                 var checkUserRoleManager = await _employeeDetailsReportService.checkUserRoleManager(userId, companyName, "'Manager'");
 
-                if(checkUserRoleManager.Rows.Count > 0)
+                if (checkUserRoleManager.Rows.Count > 0)
                 {
                     data.division_id = Convert.ToInt64(checkUserRoleManager.Rows[0]["division_id"]);
                 }

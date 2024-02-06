@@ -1,14 +1,14 @@
 ﻿using API.Services;
 using BAL.Services.Common;
+using DTO.Models;
 using DTO.Models.Auth;
 using DTO.Models.Employee;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.IO;
 using System.Linq;
-using System;
 using System.Threading.Tasks;
-using DTO.Models;
 
 namespace API.Controllers.EmployeeControllers
 {
@@ -38,7 +38,7 @@ namespace API.Controllers.EmployeeControllers
         [Route("Get/{userId}/{companyName}")]
         public async Task<IActionResult> GetByEmployeeId(string employee_id, string userId, string companyName)
         {
-            var userCompanyRoleValidate = await _authoriseRoles.AuthorizeUserRole(userId, companyName,userRoles, _roleManager, _userManager);
+            var userCompanyRoleValidate = await _authoriseRoles.AuthorizeUserRole(userId, companyName, userRoles, _roleManager, _userManager);
             if (!userCompanyRoleValidate)
             {
                 return BadRequest(new { message = "Unauthorize User.", messageDescription = "You are not authorize to use the module. Please contact with your admin for the permission" });

@@ -86,7 +86,7 @@ namespace API.Controllers
         }
 
         [HttpDelete("DeleteRoleCompanyPermission/{userId}/{companyName}/{id}")]
-        public async Task<IActionResult> DeleteRoleCompanyPermission(string userId, string companyName,long id)
+        public async Task<IActionResult> DeleteRoleCompanyPermission(string userId, string companyName, long id)
         {
             var userCompanyRoleValidate = await _authoriseRoles.AuthorizeUserRole(userId, companyName, "'Admin', 'Super Admin'", _roleManager, _userManager);
             if (!userCompanyRoleValidate)

@@ -1,6 +1,4 @@
-﻿using DTO.Models.EmployeeOperation.PrintCV;
-using DTO.Models.EmployeeOperation.PrintCV.Resume;
-using System;
+﻿using DTO.Models.EmployeeOperation.PrintCV.Resume;
 using System.Collections.Generic;
 using System.Text;
 
@@ -80,7 +78,7 @@ namespace BAL.Services.EmployeeOperations.EmployeePrintCV.Utility
 											<td class='content'><b>School/College</b></td>
 											<td class='content'><b>Year of Passing</b></td>
 											<td class='content'><b>Percentage / CGPA</b></td>"
-			);
+            );
 
             // EDUCATIONAL QUALIFICATION
             // loopable
@@ -95,8 +93,8 @@ namespace BAL.Services.EmployeeOperations.EmployeePrintCV.Utility
 								<td class='content'>{qualification.year_of_passing}</font></td>
 								<td class='content'>{qualification.percentage}</font></td>
 							</tr>"
-				);
-				qualificationIndex++;
+                );
+                qualificationIndex++;
             }
 
             // ADDITIONAL QUALIFICATION
@@ -105,7 +103,7 @@ namespace BAL.Services.EmployeeOperations.EmployeePrintCV.Utility
 									<td class='content'><b>Any other qualifications (please specify)</b></td>
 									<td class='content' colspan='5'>{"  N/A "}</td>
 							  </tr>"
-			);
+            );
 
             // PROFESSIONAL SUMMARY
             sb.Append(@"<tr>
@@ -122,8 +120,8 @@ namespace BAL.Services.EmployeeOperations.EmployeePrintCV.Utility
 							<td class='content'><b>City/state</b></td>
 						</tr>
 			");
-			// loopable
-			sb.AppendFormat(@$"<tr>
+            // loopable
+            sb.AppendFormat(@$"<tr>
 									<td class='content center'><b>1</b></td>
 									<td class='content'>{"  N/A "}</td>
 									<td class='content'>{"  N/A "}</td>
@@ -133,8 +131,8 @@ namespace BAL.Services.EmployeeOperations.EmployeePrintCV.Utility
 								</tr>
 			");
 
-			// HOBBIES and SKILLS
-			sb.AppendFormat(@$"<tr>
+            // HOBBIES and SKILLS
+            sb.AppendFormat(@$"<tr>
 							<td class='subheader'><b>IV.</b></td>
 							<td class='subheader' colspan='5'><b>Hobbies/Interests</b></td>
 							</tr>
@@ -164,8 +162,8 @@ namespace BAL.Services.EmployeeOperations.EmployeePrintCV.Utility
 							</tr>
 			 ");
 
-			//PAST EMPLOYMENT REFERENCES - loopable
-			sb.AppendFormat(@$"<tr>
+            //PAST EMPLOYMENT REFERENCES - loopable
+            sb.AppendFormat(@$"<tr>
 								<td class='content center'><b>1</b></td>
 								<td class='content'>{"  N/A "}</td>
 								<td class='content'>{"  N/A "} </td>
@@ -177,12 +175,12 @@ namespace BAL.Services.EmployeeOperations.EmployeePrintCV.Utility
 
 
 
-			sb.Append(@"		</table>
+            sb.Append(@"		</table>
 							</body>
 						</html>"
-			);
+            );
 
-			return sb.ToString();
+            return sb.ToString();
         }
     }
 }

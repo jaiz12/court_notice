@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DTO.Models.EmployeeOperation
+﻿namespace DTO.Models.EmployeeOperation
 {
     public class SearchFilterDTO
     {

@@ -1,14 +1,14 @@
 ﻿using API.Services;
 using BAL.Services.Common;
+using DTO.Models;
 using DTO.Models.Auth;
 using DTO.Models.Employee;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.IO;
 using System;
-using System.Threading.Tasks;
+using System.IO;
 using System.Linq;
-using DTO.Models;
+using System.Threading.Tasks;
 
 namespace API.Controllers.EmployeeControllers
 {
@@ -76,7 +76,7 @@ namespace API.Controllers.EmployeeControllers
                         var filename = Path.GetFileNameWithoutExtension(file.FileName);
                         var folderName = Path.Combine("assets", "employee", "qualification", "attachments", item.employee_id ?? userId);
                         var filePath = Path.Combine(folderName, Guid.NewGuid() + "_" + filename.Replace(" ", "") + ext);
-                       
+
                         // Ensure the directory exists before saving the file
                         if (!Directory.Exists(folderName))
                         {
@@ -100,7 +100,7 @@ namespace API.Controllers.EmployeeControllers
 
             DataResponse dr = await _commonService.PostOrUpdateAsync("emp_post_employee_qualification_details", item, false);
 
-            if(dr.IsSucceeded == true)
+            if (dr.IsSucceeded == true)
             {
                 dr.Message = "Qualification Details Added Successfully!";
             }

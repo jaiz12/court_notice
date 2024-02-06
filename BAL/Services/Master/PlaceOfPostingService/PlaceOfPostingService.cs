@@ -1,16 +1,15 @@
 ﻿using Common.DbContext;
-using DTO.Models.Master;
+using Common.Utilities;
 using DTO.Models;
+using DTO.Models.Master;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data;
-using Common.Utilities;
+using System.Threading.Tasks;
 
 namespace BAL.Services.Master.PlaceOfPostingService
 {
-    public class PlaceOfPostingService: MyDbContext, IPlaceOfPostingService
+    public class PlaceOfPostingService : MyDbContext, IPlaceOfPostingService
     {
         public async Task<DataResponse> PostPlaceOfPosting(PlaceOfPosting_DTO _placeOfPosting)
         {
@@ -35,7 +34,7 @@ namespace BAL.Services.Master.PlaceOfPostingService
                 else
                     return new DataResponse("Place Of Posting Already Exists", false);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -107,7 +106,7 @@ namespace BAL.Services.Master.PlaceOfPostingService
                     //return "Duplicate training type data archivation does not support!!!";
                     return new DataResponse("Failed To Delete Place Of Posting", false);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }

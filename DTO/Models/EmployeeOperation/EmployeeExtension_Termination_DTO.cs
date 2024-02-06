@@ -1,9 +1,5 @@
-﻿using DTO.Models.Common;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.Globalization;
-using System.Text;
 
 namespace DTO.Models.EmployeeOperation
 {
@@ -43,7 +39,7 @@ namespace DTO.Models.EmployeeOperation
         public long employee_service_id { get; set; }
         public string employee_id { get; set; }
         [Required(ErrorMessage = "Employee Effective To Date is required")]
-        public Boolean is_active { get; set; } 
+        public Boolean is_active { get; set; }
         public DateTime service_effective_to { get; set; }
         [Required(ErrorMessage = "Remark is required")]
         public string remark { get; set; }

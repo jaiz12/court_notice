@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DTO.Models.EmployeeOperation.PrintCV.Resume
+﻿namespace DTO.Models.EmployeeOperation.PrintCV.Resume
 {
     public class EmployeeCVPersonalInformationDTO
     {
-        public string employee_name {  get; set; }
+        public string employee_name { get; set; }
         public string date_of_birth { get; set; }
         public string gender_name { get; set; }
         public long mobile_number { get; set; }

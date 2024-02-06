@@ -1,25 +1,21 @@
 ﻿using Common.DbContext;
 using Common.Utilities;
 using DTO.Models;
-using DTO.Models.Customization;
 using DTO.Models.EmployeeOperation;
-using DTO.Models.Master;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace BAL.Services.EmployeeOperations.EmployeeAwardService
 {
-    public class EmployeeAwardService: MyDbContext, IEmployeeAwardService
+    public class EmployeeAwardService : MyDbContext, IEmployeeAwardService
     {
         public async Task<DataTable> GetEmployeeBasicServiceForAward(string username)
         {
             try
-                {
+            {
                 OpenContext();
                 _sqlCommand.Clear_CommandParameter();
                 _sqlCommand.Add_Parameter_WithValue("UserName", username);
@@ -35,7 +31,7 @@ namespace BAL.Services.EmployeeOperations.EmployeeAwardService
                 CloseContext();
             }
         }
-        public async Task<DataResponse> PostEmployeeAward(EmployeeAward_DTO employeeAward)  
+        public async Task<DataResponse> PostEmployeeAward(EmployeeAward_DTO employeeAward)
         {
             try
             {
@@ -102,7 +98,7 @@ namespace BAL.Services.EmployeeOperations.EmployeeAwardService
                 return DataTableVsListOfType.ConvertDataTableToList<EmployeeAward_DTO>(result);
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message, ex);
             }
@@ -128,7 +124,7 @@ namespace BAL.Services.EmployeeOperations.EmployeeAwardService
                                $"and employee_award_name = @prm_employee_award_name " +
                                $"and employee_id = @prm_employee_id";
                 DataTable checkAwardNameDateDT = _sqlCommand.Select_Table(query, CommandType.Text);
-                if (checkAwardNameDateDT.Rows.Count > 0 && Convert.ToInt64(checkAwardNameDateDT.Rows[0]["employee_award_id"]) != employeeAward.employee_award_id )
+                if (checkAwardNameDateDT.Rows.Count > 0 && Convert.ToInt64(checkAwardNameDateDT.Rows[0]["employee_award_id"]) != employeeAward.employee_award_id)
                 {
                     return new DataResponse("Employee Award Already Exist", false);
                 }
@@ -140,9 +136,9 @@ namespace BAL.Services.EmployeeOperations.EmployeeAwardService
                 _sqlCommand.Add_Parameter_WithValue("prm_employee_award_month", employeeAward.employee_award_month);
 
                 _sqlCommand.Add_Parameter_WithValue("prm_employee_award_id", employeeAward.employee_award_id);
-                
+
                 _sqlCommand.Add_Parameter_WithValue("prm_award_description", employeeAward.award_description == null ? null : Regex.Replace(employeeAward.award_description.Trim(), @"\s+", " "));
-               
+
                 _sqlCommand.Add_Parameter_WithValue("prm_updated_on", employeeAward.updated_on = DateTime.Now);
                 _sqlCommand.Add_Parameter_WithValue("prm_updated_by", employeeAward.updated_by);
 
@@ -177,7 +173,7 @@ namespace BAL.Services.EmployeeOperations.EmployeeAwardService
                     return new DataResponse("Failed To Delete Employee Award", false);
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception($"{ex.Message}", ex);
             }

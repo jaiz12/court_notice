@@ -86,7 +86,7 @@ namespace BAL.Services.Master.Menu
                         message = "Menu successfully Updated";
                         status = true;
                     }
-                       
+
                     else
                     {
                         message = "Menu Update failed";
