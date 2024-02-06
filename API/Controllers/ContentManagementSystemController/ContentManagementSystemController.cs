@@ -1,10 +1,12 @@
 ﻿using API.Services;
 using BAL.Services.ContentManagementSystem.ContentManagementSystem;
+using BAL.Services.SignalR;
 using DTO.Models.Auth;
 using DTO.Models.ContentManagementSystem;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using System.Threading.Tasks;
 
 namespace API.Controllers.ContentManagementSystemController
@@ -23,15 +25,18 @@ namespace API.Controllers.ContentManagementSystemController
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IAuthoriseRoles _authoriseRoles;
+        private readonly IHubContext<NotificationAlert> _notificationAlertHubContext;
         public ContentManagementSystemController(IContentManagementSystemService contentManagementSystemService, 
             UserManager<ApplicationUser> userManager,
             RoleManager<IdentityRole> roleManager, 
-            IAuthoriseRoles authoriseRoles)
+            IAuthoriseRoles authoriseRoles,
+            IHubContext<NotificationAlert> notificationAlertHubContext)
         {
             _contentManagementSystemService = contentManagementSystemService;
             _authoriseRoles = authoriseRoles;
             _userManager = userManager;
             _roleManager = roleManager;
+            _notificationAlertHubContext = notificationAlertHubContext;
         }
         [HttpPost("PostCMSDetails/{userId}/{companyName}")]
         public async Task<IActionResult> PostCMSDetails(ContentManagementSystem_DTO cmsDetails, string userId, string companyName)
@@ -44,6 +49,7 @@ namespace API.Controllers.ContentManagementSystemController
             try
             {
                 var result = await _contentManagementSystemService.PostCMSDetails(cmsDetails);
+                await _notificationAlertHubContext.Clients.All.SendAsync("NewNoticeAlert");
                 return Ok(new { result = result });
             }
             catch
@@ -62,6 +68,7 @@ namespace API.Controllers.ContentManagementSystemController
             try
             {
                 var result = await _contentManagementSystemService.PutCMSDetails(cmsDetails);
+                await _notificationAlertHubContext.Clients.All.SendAsync("NewNoticeAlert");
                 return Ok(new { result = result });
             }
             catch
@@ -80,6 +87,7 @@ namespace API.Controllers.ContentManagementSystemController
             try
             {
                 var result = await _contentManagementSystemService.DeleteCMSDetails(cms_id);
+                await _notificationAlertHubContext.Clients.All.SendAsync("NewNoticeAlert");
                 return Ok(new { result = result });
             }
             catch

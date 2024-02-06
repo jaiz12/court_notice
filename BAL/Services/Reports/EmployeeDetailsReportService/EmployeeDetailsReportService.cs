@@ -124,32 +124,30 @@ namespace BAL.Services.Reports.EmployeeDetailsReportService
                 OpenContext();
                 _sqlCommand.Clear_CommandParameter();
                 var query =
-                    $"SELECT t1.employee_id, t1.leave_type_id, t12.leave_type_name,  t1.financial_year_id, t1.total_leave, ISNULL(t2.total_leave_applied, 0) as total_leave_applied, " +
-                    $"t3.first_name, t3.middle_name, t3.last_name, t5.company_name,  t6.branch_name,  t7.place_of_posting_name, t8.division_name, t9.designation_name, t10.appointment_status_name " +
-                    $"FROM lv_employee_wise_leave_config as t1 " +
-                    $"JOIN (SELECT employee_id, leave_type_id, SUM(total_leave_applied) as total_leave_applied " +
-                    //note for dev
-                    //now in this query, show leave apply cases
-                    //if user want both type of data for ex, applyleave_case & remainleave_case just change above join to left join.
-                    $"FROM  lv_apply_leave ";
+                $"SELECT t1.employee_id, t1.leave_type_id, t12.leave_type_name, t1.financial_year_id, t1.total_leave, ISNULL(t2_subquery.total_leave_applied, 0) as total_leave_applied, " +
+                $"t3.first_name, t3.middle_name, t3.last_name, t5.company_name, t6.branch_name, t7.place_of_posting_name, t8.division_name, t9.designation_name, t10.appointment_status_name, " +
+                $"t2_subquery.attachment_url, t2_subquery.from_date, t2_subquery.to_date, t2_subquery.is_approve " + 
+                $"FROM lv_employee_wise_leave_config as t1 " +
+                $"JOIN (SELECT employee_id, leave_type_id, SUM(total_leave_applied) as total_leave_applied, MAX(attachment_url) as attachment_url, MAX(from_date) as from_date, MAX(to_date) as to_date, MAX(is_approve) as is_approve " +  
+                $"FROM lv_apply_leave ";
                 if (data.month != 0)
                 {
-                    query += $" where MONTH(updated_on) = {data.month} ";
+                    query += $"WHERE MONTH(updated_on) = {data.month} ";
                 }
-                query += $"GROUP BY leave_type_id, employee_id ) as t2  ON t2.leave_type_id = t1.leave_type_id and t2.employee_id = t1.employee_id " +
-                    $"JOIN emp_employee_personal_details as t3 ON t3.employee_id = t1.employee_id " +
-                    $"Join emp_employee_service_details as t4 ON t4.employee_id = t1.employee_id " +
-                    $"Join emp_company_master as t5 On t5.company_id = t4.company_id " +
-                    $"Join emp_branch_master as t6 ON t6.branch_id = t4.branchoffice_id " +
-                    $"Join emp_place_of_posting_master as t7 On t7.place_of_posting_id = t4.place_of_posting_id " +
-                    $"Join emp_division_master as t8 ON t8.division_id = t4.division_id " +
-                    $"Join emp_designation_master as t9 on t9.designation_id = t4.designation_id " +
-                    $"Join emp_appointment_status_master as t10 On t10.appointment_status_id = t4.appointment_status_id " +
-                    $"Join lv_financial_year_master as t11 ON t11.financial_year_id = t1.financial_year_id " +
-                    $"Join lv_leave_type_master as t12 on t12.leave_type_id = t1.leave_type_id " +
-                    $"WHERE t4.is_active = 1 And GETDATE() between t11.from_date and t11.to_date ";
+                query += $"GROUP BY leave_type_id, employee_id ) as t2_subquery ON t2_subquery.leave_type_id = t1.leave_type_id and t2_subquery.employee_id = t1.employee_id " +
+                $"JOIN emp_employee_personal_details as t3 ON t3.employee_id = t1.employee_id " +
+                $"JOIN emp_employee_service_details as t4 ON t4.employee_id = t1.employee_id " +
+                $"JOIN emp_company_master as t5 ON t5.company_id = t4.company_id " +
+                $"JOIN emp_branch_master as t6 ON t6.branch_id = t4.branchoffice_id " +
+                $"JOIN emp_place_of_posting_master as t7 ON t7.place_of_posting_id = t4.place_of_posting_id " +
+                $"JOIN emp_division_master as t8 ON t8.division_id = t4.division_id " +
+                $"JOIN emp_designation_master as t9 on t9.designation_id = t4.designation_id " +
+                $"JOIN emp_appointment_status_master as t10 ON t10.appointment_status_id = t4.appointment_status_id " +
+                $"JOIN lv_financial_year_master as t11 ON t11.financial_year_id = t1.financial_year_id " +
+                $"JOIN lv_leave_type_master as t12 on t12.leave_type_id = t1.leave_type_id " +
+                $"WHERE t4.is_active = 1 AND GETDATE() BETWEEN t11.from_date AND t11.to_date ";
 
-                if(data.company_id != 0)
+                if (data.company_id != 0)
                 {
                     query += $" and t4.company_id = {data.company_id} ";
                 }

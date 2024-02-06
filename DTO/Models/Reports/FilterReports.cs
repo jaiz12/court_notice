@@ -25,5 +25,9 @@ namespace DTO.Models.Reports
         public long appointment_status_id { get; set;}
         public long leave_type_id { get; set;}
         public long month { get; set; }
+        public string attachment_url { get; set;}
+        public DateTime from_date { get; set; }
+        public DateTime to_date { get; set; }
+        public string is_approve { get; set;}
     }
 }

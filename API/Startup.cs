@@ -2,6 +2,7 @@ using API.Configurations;
 using API.Services;
 using BAL.DependencyResolver;
 using BAL.Services.BirthdayWish;
+using BAL.Services.SignalR;
 using Common.DataContext;
 using DTO.Models.Auth;
 using ExceptionHandling.DependencyResolver;
@@ -150,6 +151,7 @@ namespace API
             {
                 endpoints.MapControllers();
                 endpoints.MapHub<BirthdayWishService>("/BirthdayWishes");
+                endpoints.MapHub<NotificationAlert>("/NotificationAlerts");
             }); // for 3.1
                 // ===== Create tables ====== 
         }
