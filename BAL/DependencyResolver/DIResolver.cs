@@ -104,7 +104,7 @@ namespace BAL.DependencyResolver
             services.AddScoped<IDashboardSkinService, DashboardSkinService>();
             services.AddScoped<IPlaceOfPostingService, PlaceOfPostingService>();
             services.AddScoped<IEmployeeAwardService, EmployeeAwardService>();
-            services.AddScoped<Services.EmployeeOperations.EmployeePromotionService.IAppointmentStatusService, Services.EmployeeOperations.EmployeePromotionService.AppointmentStatusService>();
+            services.AddScoped<Services.EmployeeOperations.EmployeePromotionService.IEmployeePromotionService, Services.EmployeeOperations.EmployeePromotionService.EmployeePromotionService>();
             services.AddScoped<IEmployeeExtension_TerminationService, EmployeeExtension_TerminationService>();
             services.AddScoped<IContentManagementSystemService, ContentManagementSystemService>();
             services.AddScoped<IContentMessageManagementSystemService, ContentMessageManagementSystemService>();
