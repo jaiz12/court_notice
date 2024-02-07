@@ -47,6 +47,11 @@ using DinkToPdf.Contracts;
 using DTO.Models.Master;
 using Microsoft.Extensions.DependencyInjection;
 using System.IO;
+using BAL.Services.Dashboard;
+using BAL.Services.ContentManagementSystem.ContentManagementSystem;
+using BAL.Services.ContentManagementSystem.ContentMessageManagementSystem;
+using BAL.Services.BirthdayWish;
+using BAL.Services.EmployeeOperations.Employee_AppointmentStatusService;
 
 namespace BAL.DependencyResolver
 {
@@ -71,13 +76,14 @@ namespace BAL.DependencyResolver
             services.AddScoped<IMaritalStatus, MaritalStatus>();
             services.AddScoped<IReligion, Religion>();
             services.AddScoped<IEmployeeBirthdayService, EmployeeBirthdayService>();
+            services.AddScoped<IEmployee_AppointmentStatusService, Employee_AppointmentStatusService>();
 
 
             /* Added By : Pranai Giri */
             services.AddScoped<DatabaseLockConfiguration>();
             services.AddScoped<IMasterCommonService, MasterCommonService>();
             services.AddScoped<ICommunityService, CommunityService>();
-            services.AddScoped<IAppointmentStatusService, AppointmentStatusService>();
+            services.AddScoped<Services.Master.MasterServices.AppointmentStatus.IAppointmentStatusService, Services.Master.MasterServices.AppointmentStatus.AppointmentStatusService>();
             services.AddScoped<IResidentialStatusService, ResidentialStatusService>();
             services.AddScoped<IQualificationService, QualificationService>();
             services.AddScoped<ICourseService, CourseService>();
@@ -99,7 +105,7 @@ namespace BAL.DependencyResolver
             services.AddScoped<IDashboardSkinService, DashboardSkinService>();
             services.AddScoped<IPlaceOfPostingService, PlaceOfPostingService>();
             services.AddScoped<IEmployeeAwardService, EmployeeAwardService>();
-            services.AddScoped<IEmployeePromotionService, EmployeePromotionService>();
+            services.AddScoped<Services.EmployeeOperations.EmployeePromotionService.IEmployeePromotionService, Services.EmployeeOperations.EmployeePromotionService.EmployeePromotionService>();
             services.AddScoped<IEmployeeExtension_TerminationService, EmployeeExtension_TerminationService>();
             services.AddScoped<IContentManagementSystemService, ContentManagementSystemService>();
             services.AddScoped<IContentMessageManagementSystemService, ContentMessageManagementSystemService>();
