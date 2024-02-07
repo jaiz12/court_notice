@@ -6,6 +6,7 @@ using BAL.Services.Customization.DashboardSkinService;
 using BAL.Services.Dashboard;
 using BAL.Services.EmployeeOperations.EmployeeAwardService;
 using BAL.Services.EmployeeOperations.EmployeeBirthday;
+using BAL.Services.EmployeeOperations.EmployeeExitsService;
 using BAL.Services.EmployeeOperations.EmployeeExtensionService;
 using BAL.Services.EmployeeOperations.EmployeePrintCV;
 using BAL.Services.EmployeeOperations.EmployeePrintCV.Utility;
@@ -108,6 +109,7 @@ namespace BAL.DependencyResolver
             services.AddScoped<IEmployeeExtension_TerminationService, EmployeeExtension_TerminationService>();
             services.AddScoped<IContentManagementSystemService, ContentManagementSystemService>();
             services.AddScoped<IContentMessageManagementSystemService, ContentMessageManagementSystemService>();
+            services.AddScoped<IEmployeeExitsService, EmployeeExitsService>();
 
             /* Added By : Sandeep Chauhan */
             services.AddScoped<ICasteService, CasteService>();
