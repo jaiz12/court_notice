@@ -67,6 +67,7 @@ namespace API.Controllers.EmployeeOperationsController
                 return BadRequest();
             }
         }
+
         
         [HttpPost("GetEmployee_AppointmentStatusHistory/{userId}/{companyName}")]
         public async Task<IActionResult> GetEmployee_AppointmentStatusHistory(Employee_AppointmentStatus_DTO model,string userId, string companyName)
@@ -87,6 +88,26 @@ namespace API.Controllers.EmployeeOperationsController
             }
         }
 
-       
+
+        [HttpPut("UpdateEmployee_AppointmentStatus_Revert/{userId}/{companyName}")]
+        public async Task<IActionResult> UpdateEmployee_AppointmentStatus_Revert(Employee_AppointmentStatus_DTO_Revert model, string userId, string companyName)
+        {
+            var userCompanyRoleValidate = await _authoriseRoles.AuthorizeUserRole(userId, companyName, "'Admin','Super Admin', 'Company Head', 'Manager'", _roleManager, _userManager);
+            if (!userCompanyRoleValidate)
+            {
+                return BadRequest(new { message = "Unauthorize User.", messageDescription = "You are not authorize to use the module. Please contact with your admin for the permission" });
+            }
+            try
+            {
+                var result = await _employeePromotionService.UpdateEmployee_AppointmentStatus_Revert(model);
+                return Ok(new { result = result });
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
+
     }
 }

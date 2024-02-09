@@ -16,7 +16,18 @@ namespace DTO.Models.EmployeeOperation
     public class Employee_AppointmentStatus_DTO_Edit
     {
         public string employee_id { get; set; }
-        public long? appointment_status_id { get; set; }
+        public long appointment_status_id { get; set; }
         public string updated_by { get; set; }
+    }
+
+    public class Employee_AppointmentStatus_DTO_Revert
+    {
+        public string employee_id { get; set; }
+        public long employee_service_id { get; set; }
+        public long appointment_status_id { get; set; }
+        public DateTime effective_from { get; set; }
+        public DateTime effective_to { get; set; }
+        public string updated_by { get; set; }
+        public DateTime updated_on { get; set; }
     }
 }
