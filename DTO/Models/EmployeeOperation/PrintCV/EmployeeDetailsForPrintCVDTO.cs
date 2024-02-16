@@ -12,5 +12,7 @@
         public string division_name { get; set; }
         public string place_of_posting_name { get; set; }
         public string appointment_status_name { get; set; }
+        public string state_name { get; set; }
+        public string district_name { get; set; }
     }
 }

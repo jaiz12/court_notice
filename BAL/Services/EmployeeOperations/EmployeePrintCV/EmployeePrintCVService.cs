@@ -43,14 +43,14 @@ namespace BAL.Services.EmployeeOperations.EmployeePrintCV
 
         public async Task<dynamic> GetEmployeeListForPrintCV(PaginationEntityDTO pagination = null)
         {
-            DataSet ds = await _commonService.GetDataSetByIdAsync("emp_get_employee_list_for_print_cv", null, null, pagination);
+            DataSet ds = await _commonService.GetDataSetByIdAsync("emp_get_employee_list_for_print_cv_v2", null, null, pagination);
 
-            int TotalRows = (int)ds.Tables[0].Rows[0]["TotalRows"];
-            List<EmployeeDetailsForPrintCVDTO> EmployeeList = DataTableVsListOfType.ConvertDataTableToList<EmployeeDetailsForPrintCVDTO>(ds.Tables[1]);
+            //int TotalRows = (int)ds.Tables[0].Rows[0]["TotalRows"];
+            List<EmployeeDetailsForPrintCVDTO> EmployeeList = DataTableVsListOfType.ConvertDataTableToList<EmployeeDetailsForPrintCVDTO>(ds.Tables[0]);
 
             var item = new
             {
-                totalRows = TotalRows,
+                //totalRows = TotalRows,
                 employeeList = EmployeeList
             };
 

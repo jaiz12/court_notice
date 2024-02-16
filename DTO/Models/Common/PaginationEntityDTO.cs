@@ -2,7 +2,7 @@
 {
     public class PaginationEntityDTO
     {
-        public string searchTerm { get; set; }
+        public string? searchTerm { get; set; }
         public int? pageNumber { get; set; }
         public int? pageSize { get; set; }
         public string? sortColumn { get; set; }
