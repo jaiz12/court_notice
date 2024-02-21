@@ -19,10 +19,8 @@ using BAL.Services.Master.MaritalStatusService;
 using BAL.Services.Master.MasterServices.AppointmentStatus;
 using BAL.Services.Master.MasterServices.Community;
 using BAL.Services.Master.MasterServices.Qualification;
-using BAL.Services.Master.MasterServices.ResidentialStatus;
 using BAL.Services.Master.Menu;
 using BAL.Services.Master.ModeOfTrainingService;
-using BAL.Services.Master.NationalityService;
 using BAL.Services.Master.ReligionService;
 using BAL.Services.Master.SpecializationService;
 using BAL.Services.Master.State;
@@ -78,7 +76,6 @@ namespace BAL.DependencyResolver
             services.AddScoped<IMasterCommonService, MasterCommonService>();
             services.AddScoped<ICommunityService, CommunityService>();
             services.AddScoped<IAppointmentStatusService, AppointmentStatusService>();
-            services.AddScoped<IResidentialStatusService, ResidentialStatusService>();
             services.AddScoped<IQualificationService, QualificationService>();
             services.AddScoped<ICourseService, CourseService>();
             services.AddScoped<ICommonService, CommonService>();
@@ -92,7 +89,6 @@ namespace BAL.DependencyResolver
             services.AddScoped<IGenderService, GenderService>();
             services.AddScoped<ITrainingTypeService, TrainingTypeService>();
             services.AddScoped<IBloodGroupService, BloodGroupService>();
-            services.AddScoped<INationalityService, NationalityService>();
             services.AddScoped<IDivisionService, DivisionService>();
             services.AddScoped<IStreamService, StreamService>();
             services.AddScoped<IBranchService, BranchService>();

@@ -23,8 +23,7 @@ namespace DTO.Models.Employee
         public long? blood_group_id { get; set; }
         public long? community_id { get; set; }
         public long? religion_id { get; set; }
-        public long? nationality_id { get; set; }
-        public long? residential_status_id { get; set; }
+        public string? nationality_name { get; set; }
         public string address { get; set; }
     }
 }
