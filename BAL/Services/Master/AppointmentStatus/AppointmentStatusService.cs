@@ -1,5 +1,4 @@
-﻿using BAL.Services.Master.Common;
-using Common.DbContext;
+﻿using Common.DbContext;
 using Common.Utilities;
 using DTO.Models;
 using DTO.Models.Master;
@@ -10,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BAL.Services.Master.MasterServices.AppointmentStatus
 {
-    public class AppointmentStatusService: MyDbContext, IAppointmentStatusService
+    public class AppointmentStatusService : MyDbContext, IAppointmentStatusService
     {
 
         //private IMasterCommonService _commonService;
@@ -48,7 +47,7 @@ namespace BAL.Services.Master.MasterServices.AppointmentStatus
                 DataTable appointmentStatusDT = _sqlCommand.Select_Table("emp_get_appointment_status_master", CommandType.StoredProcedure);
                 return DataTableVsListOfType.ConvertDataTableToList<AppointmentStatusDTO>(appointmentStatusDT);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception($"Failed To Fetch, {ex.Message}");
             }
@@ -77,7 +76,7 @@ namespace BAL.Services.Master.MasterServices.AppointmentStatus
                 else
                     return new DataResponse("Appointment Status Already Exists", false);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -129,7 +128,7 @@ namespace BAL.Services.Master.MasterServices.AppointmentStatus
                 else
                     return new DataResponse("Failed To Delete Appointment Status", false);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }

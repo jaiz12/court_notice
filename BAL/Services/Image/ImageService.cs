@@ -1,12 +1,9 @@
 ﻿using Common.DbContext;
 using Common.Utilities;
 using DTO.Models;
-using DTO.Models.Auth;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BAL.Services.Image
@@ -71,7 +68,7 @@ namespace BAL.Services.Image
         {
             try
             {
-                
+
                 OpenContext();
                 var Data = await Task.Run(() => _sqlCommand.Select_Table("get_file", CommandType.StoredProcedure));
                 var images = DataTableVsListOfType.ConvertDataTableToList<Image_DTO>(Data);

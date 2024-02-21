@@ -7,7 +7,7 @@ namespace DTO.Models.Auth
     {
         [Key]
         public long Id { get; set; }
-       
+
         public string CompanyName { get; set; }
         [Required(ErrorMessage = "Name Is Required")]
         public string Name { get; set; }

@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BAL.Services.Image;
+using DTO.Models;
+using Microsoft.AspNetCore.Mvc;
+using System;
 using System.IO;
 using System.Threading.Tasks;
-using System;
-using DTO.Models;
-using BAL.Services.Image;
 
 namespace API.Controllers
 {

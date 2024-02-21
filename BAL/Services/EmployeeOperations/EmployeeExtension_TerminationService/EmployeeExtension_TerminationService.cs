@@ -3,7 +3,6 @@ using DTO.Models;
 using DTO.Models.EmployeeOperation;
 using System;
 using System.Data;
-using System.Data.SqlClient;
 using System.Threading.Tasks;
 
 namespace BAL.Services.EmployeeOperations.EmployeeExtensionService
@@ -91,29 +90,29 @@ namespace BAL.Services.EmployeeOperations.EmployeeExtensionService
                 Trans = _connection._Connection.BeginTransaction(IsolationLevel.Serializable);
                 _sqlCommand.Add_Transaction(Trans);
 
-               
+
 
                 string ServiceEffectiveTo = Convert.ToDateTime(employee.service_effective_to).ToString("yyyy-MM-dd");
 
-             
+
 
                 if (employee.employee_service_id != 0)
                 {
                     //_sqlCommand.Add_Parameter_WithValue("prm_service_extend_terminate_id", employee.service_extend_terminate_id);
                     //_sqlCommand.Add_Parameter_WithValue("prm_employee_service_id", employee.employee_service_id);
 
-                    query =    $"Update emp_employee_service_details " +
+                    query = $"Update emp_employee_service_details " +
                                 $"SET " +
                                 $"effective_to = '{ServiceEffectiveTo}' " +
                                 $"where " +
-                                $"employee_service_id = {employee.employee_service_id } ";
+                                $"employee_service_id = {employee.employee_service_id} ";
 
 
                     _sqlCommand.Execute_Query(query, CommandType.Text);
 
                     if (employee.service_extend_terminate_id != 0)
                     {
-                        query +=    $" Update emp_employee_service_extend_termination " +
+                        query += $" Update emp_employee_service_extend_termination " +
                                 "SET " +
                                 "is_active = 0 " +
                                 "Where " +

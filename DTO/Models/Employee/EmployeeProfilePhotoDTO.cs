@@ -1,8 +1,5 @@
 ﻿using DTO.Models.Common;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace DTO.Models.Employee
 {

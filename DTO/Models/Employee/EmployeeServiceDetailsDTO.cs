@@ -22,6 +22,6 @@ namespace DTO.Models.Employee
         public long place_of_posting_id { get; set; }
         public DateTime effective_from { get; set; }
         public DateTime effective_to { get; set; }
-        public bool is_active {  get; set; }
+        public bool is_active { get; set; }
     }
 }

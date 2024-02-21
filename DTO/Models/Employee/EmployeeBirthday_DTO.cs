@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace DTO.Models.Employee
 {
@@ -27,7 +25,7 @@ namespace DTO.Models.Employee
         public string comment_employee_id { get; set; }
         public string emp_first_name { get; set; }
         public string emp_middle_name { get; set; }
-        public string emp_last_name { get;set; }
+        public string emp_last_name { get; set; }
         public string commenter_first_name { get; set; }
         public string commenter_middle_name { get; set; }
         public string commenter_last_name { get; set; }

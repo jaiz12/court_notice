@@ -9,8 +9,6 @@ using System.Globalization;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
-using System.Xml.Linq;
 
 namespace BAL.Services.Master.Common
 {

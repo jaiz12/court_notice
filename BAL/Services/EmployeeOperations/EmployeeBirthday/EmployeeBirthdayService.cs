@@ -3,16 +3,14 @@ using Common.Utilities;
 using DTO.Models;
 using DTO.Models.BirthdayWishesDTO;
 using DTO.Models.Employee;
-using DTO.Models.Master;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BAL.Services.EmployeeOperations.EmployeeBirthday
 {
-    public class EmployeeBirthdayService: MyDbContext , IEmployeeBirthdayService
+    public class EmployeeBirthdayService : MyDbContext, IEmployeeBirthdayService
     {
         public async Task<List<EmployeeBirthday_DTO>> GetBirthday()
         {
@@ -62,7 +60,7 @@ namespace BAL.Services.EmployeeOperations.EmployeeBirthday
             try
             {
                 OpenContext();
-                _sqlCommand.Clear_CommandParameter();                
+                _sqlCommand.Clear_CommandParameter();
                 _sqlCommand.Add_Parameter_WithValue("prm_comment", data.comment);
                 _sqlCommand.Add_Parameter_WithValue("prm_created_on", DateTime.Now);
 
@@ -79,14 +77,14 @@ namespace BAL.Services.EmployeeOperations.EmployeeBirthday
                 else
                 {
                     _sqlCommand.Add_Parameter_WithValue("prm_birthday_comment_id", data.birthday_comment_id);
-                   
+
                     var update = await Task.Run(() => _sqlCommand.Execute_Query("emp_update_birthday_comment", CommandType.StoredProcedure));
                     if (update)
                         return new DataResponse("Comment Updated Successfully", true);
                     else
                         return new DataResponse("Comment Already Exists", false);
                 }
-                   
+
             }
             catch (Exception ex)
             {
@@ -150,7 +148,8 @@ namespace BAL.Services.EmployeeOperations.EmployeeBirthday
             try
             {
 
-                BirthdayWishesDTO obj = new BirthdayWishesDTO {
+                BirthdayWishesDTO obj = new BirthdayWishesDTO
+                {
                     employee_id = employee_id,
                     birthday_comment_id = null,
                     comment = null,

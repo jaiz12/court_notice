@@ -2,14 +2,11 @@
 using BAL.Services.BirthdayWish;
 using BAL.Services.Common;
 using BAL.Services.EmployeeOperations.EmployeeBirthday;
-using BAL.Services.Master.BoardsService;
 using DTO.Models;
 using DTO.Models.Auth;
 using DTO.Models.BirthdayWishesDTO;
 using DTO.Models.Employee;
-using DTO.Models.Master;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
@@ -30,7 +27,7 @@ namespace API.Controllers.EmployeeOperationsController
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IAuthoriseRoles _authoriseRoles;
         private readonly IHubContext<BirthdayWishService> _birthdayHubContext;
-        private readonly ICommonService _commonService; 
+        private readonly ICommonService _commonService;
         public EmployeeBirthdayController
         (
             IEmployeeBirthdayService IEmployeeBirthdayService,
@@ -84,7 +81,7 @@ namespace API.Controllers.EmployeeOperationsController
 
         [HttpGet("GetBirthdayCommentByBirthdayPersonIdAndTimestamp/{userId}/{companyName}")]
         public async Task<IActionResult> GetBirthdayCommentByBirthdayPersonIdAndTimestamp(string employee_id, DateTime? timestamp, string userId, string companyName)
-        { 
+        {
             var userCompanyRoleValidate = await _authoriseRoles.AuthorizeUserRole(userId, companyName, "'Admin','Super Admin', 'Company Head', 'Employee', 'Manager'", _roleManager, _userManager);
             if (!userCompanyRoleValidate)
             {
@@ -95,7 +92,7 @@ namespace API.Controllers.EmployeeOperationsController
                 return BadRequest(ModelState);
             }
 
-            if(timestamp == null)
+            if (timestamp == null)
             {
                 var birthday = await _IEmployeeBirthdayService.GetBirthdayComment(employee_id);
                 return Ok(new { result = birthday });
@@ -111,7 +108,7 @@ namespace API.Controllers.EmployeeOperationsController
         [HttpPost("PostBirthdayComment/{userId}/{companyName}")]
         public async Task<IActionResult> Post(EmployeeBirthday_DTO data, string userId, string companyName)
         {
-            var userCompanyRoleValidate = await _authoriseRoles.AuthorizeUserRole(userId, companyName, "'Admin','Super Admin', 'Leave Admin','Company Head', 'Employee', 'Manager'" ,_roleManager, _userManager);
+            var userCompanyRoleValidate = await _authoriseRoles.AuthorizeUserRole(userId, companyName, "'Admin','Super Admin', 'Leave Admin','Company Head', 'Employee', 'Manager'", _roleManager, _userManager);
             if (!userCompanyRoleValidate)
             {
                 return BadRequest(new { message = "Unauthorize User.", messageDescription = "You are not authorize to use the module. Please contact with your admin for the permission" });
@@ -181,11 +178,11 @@ namespace API.Controllers.EmployeeOperationsController
                 DataResponse res = null;
                 if (birthdayWish.birthday_comment_id > 0)
                 {
-                     res = await _commonService.PostOrUpdateAsync("emp_update_birthday_comment", birthdayWish, true);
+                    res = await _commonService.PostOrUpdateAsync("emp_update_birthday_comment", birthdayWish, true);
                 }
                 else
                 {
-                     res = await _commonService.PostOrUpdateAsync("emp_post_birthday_comment", birthdayWish, false);
+                    res = await _commonService.PostOrUpdateAsync("emp_post_birthday_comment", birthdayWish, false);
                 }
 
                 //await BroadcastBirthdayWishes(birthdayWish.employee_id);

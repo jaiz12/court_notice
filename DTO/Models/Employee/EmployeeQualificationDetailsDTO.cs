@@ -1,5 +1,4 @@
 ﻿using DTO.Models.Common;
-using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace DTO.Models.Employee
