@@ -49,6 +49,7 @@ using BAL.Services.ContentManagementSystem.ContentManagementSystem;
 using BAL.Services.ContentManagementSystem.ContentMessageManagementSystem;
 using BAL.Services.BirthdayWish;
 using BAL.Services.EmployeeOperations.Employee_AppointmentStatusService;
+using BAL.Services.Master.PlaceOfPostingService;
 
 namespace BAL.DependencyResolver
 {
@@ -81,7 +82,6 @@ namespace BAL.DependencyResolver
             services.AddScoped<IMasterCommonService, MasterCommonService>();
             services.AddScoped<ICommunityService, CommunityService>();
             services.AddScoped<Services.Master.MasterServices.AppointmentStatus.IAppointmentStatusService, Services.Master.MasterServices.AppointmentStatus.AppointmentStatusService>();
-            services.AddScoped<IResidentialStatusService, ResidentialStatusService>();
             services.AddScoped<IAppointmentStatusService, AppointmentStatusService>();
             services.AddScoped<IQualificationService, QualificationService>();
             services.AddScoped<ICourseService, CourseService>();
