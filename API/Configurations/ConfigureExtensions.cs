@@ -1,7 +1,5 @@
 ﻿
 using BAL.DependencyResolver;
-using DTO.Core;
-using DTO.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -60,8 +58,6 @@ namespace API.Configurations
 
         public static void ConfigureDI(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddSingleton(configuration.GetSection("SMSSettings").Get<SMSSettings>());
-            services.AddSingleton(configuration.GetSection("JWTSettings").Get<JWTSettings>());
             services.DIBALResolver();
         }
 
@@ -90,11 +86,6 @@ namespace API.Configurations
             })
             .AddCookie();
 
-            services.AddAuthorization(opt => opt.
-            AddPolicy(_authTokenPolicy, policy =>
-            {
-                policy.RequireClaim(CustomClaimTypes.Permission);
-            }));
         }
     }
 }

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>D:\publishCode\employeeProfileAPI</_PublishTargetUrl>
+    <History>True|2024-02-22T06:55:49.1795889Z;True|2024-02-22T12:00:07.8711713+05:30;True|2024-02-06T17:02:36.8891961+05:30;False|2024-02-06T16:58:46.5928871+05:30;False|2024-02-06T16:28:10.0842206+05:30;False|2024-02-06T16:26:43.6520807+05:30;False|2024-02-06T16:26:02.8386216+05:30;False|2024-02-06T14:15:45.3146264+05:30;True|2024-01-27T11:32:30.4029840+05:30;True|2024-01-24T11:32:37.9100422+05:30;True|2024-01-24T10:19:29.4023336+05:30;True|2024-01-23T09:31:01.8329847+05:30;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+</Project>

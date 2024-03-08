@@ -1,8 +1,6 @@
 using API.Configurations;
 using API.Services;
 using BAL.DependencyResolver;
-using BAL.Services.BirthdayWish;
-using BAL.Services.SignalR;
 using Common.DataContext;
 using DTO.Models.Auth;
 using ExceptionHandling.DependencyResolver;
@@ -11,6 +9,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -61,6 +60,8 @@ namespace API
             services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
 
             services.ExceptionDIResolver();
+
+
             services.AddSwaggerGen();
             services.AddDistributedMemoryCache();
 
@@ -73,15 +74,10 @@ namespace API
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>()
-            .AddTokenProvider<DataProtectorTokenProvider<ApplicationUser>>(TokenOptions.DefaultProvider);
+            .AddDefaultTokenProviders();
+            //.AddTokenProvider<DataProtectorTokenProvider<ApplicationUser>>(TokenOptions.DefaultProvider);
 
-            services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            }
-            );
+           
             //===== Add Jwt Authentication ========
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear(); // => remove default claims
             services
@@ -104,10 +100,18 @@ namespace API
                     ClockSkew = TimeSpan.Zero // remove delay of token when expire
                 };
             });
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            services.AddDistributedMemoryCache();
+            services.ConfigureApplicationCookie(sessionConfig =>
+            {
+                sessionConfig.ExpireTimeSpan = TimeSpan.FromHours(24);
+                sessionConfig.SlidingExpiration = true;
+            });
+            services.AddSession(opt=> { 
+                opt.IdleTimeout = TimeSpan.FromHours(24);
+            });
             services.AddSingleton<Services.IEmailSender, EmailSender>();
-            services.AddScoped<IAuthoriseRoles, AuthoriseRoles>();
-
-
+            services.AddScoped<Services.IAspNetRoles, AspNetRoles>(); 
             services.SwaggerConfiguration();
 
         }
@@ -124,7 +128,6 @@ namespace API
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
             app.UseStaticFiles(new StaticFileOptions
             {
                 FileProvider = new PhysicalFileProvider(
@@ -142,16 +145,12 @@ namespace API
             app.UseHttpsRedirection();
             //app.UseMvc(); not needed in 3.1
 
-
             app.UseRouting(); // for 3.1
             app.UseAuthentication();
             app.UseAuthorization(); //for 3.1
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHub<BirthdayWishService>("/BirthdayWishes");
-                endpoints.MapHub<NotificationAlert>("/NotificationAlerts");
             }); // for 3.1
                 // ===== Create tables ====== 
         }
